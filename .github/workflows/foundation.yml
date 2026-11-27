@@ -1,0 +1,37 @@
+name: Foundation checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: foundation-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  foundation:
+    name: Foundation checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out candidate
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Set up pinned uv and Python
+        uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7
+        with:
+          version: "0.13.10"
+          python-version: "3.12"
+          enable-cache: false
+          github-token: ""
+      - name: Install locked verification dependencies
+        run: uv sync --locked
+      - name: Test behavior and failure paths
+        run: .venv/bin/python -m unittest discover -s tests -v
+      - name: Check catalog CLI acceptance and rejection
+        run: .venv/bin/python scripts/check_catalog_fixtures.py
+      - name: Check provenance metadata
+        run: .venv/bin/python upstream/check_inventory.py
+      - name: Scan candidate files without logging secret values
+        run: .venv/bin/python scripts/check_secrets.py

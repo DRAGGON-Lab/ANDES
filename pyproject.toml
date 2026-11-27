@@ -4,5 +4,8 @@ version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = ["jsonschema>=4.23,<5"]
 
+[dependency-groups]
+dev = ["detect-secrets==1.5.0"] # pragma: allowlist secret -- public package version, not a credential
+
 [tool.uv]
 package = false

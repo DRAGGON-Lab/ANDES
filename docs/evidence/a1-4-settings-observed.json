@@ -1,0 +1,20 @@
+{
+  "observed_at": "2026-11-27T16:44:22Z",
+  "method": "Connected GitHub GET; no mutations",
+  "repository": "DRAGGON-Lab/ANDES",
+  "branch": {
+    "url": "https://api.github.com/repos/DRAGGON-Lab/ANDES/branches/main",
+    "name": "main",
+    "sha": "5b838b1c87db01330d1eef1f6fa2bd93c5340178",
+    "protected": false
+  },
+  "rulesets": {
+    "url": "https://api.github.com/repos/DRAGGON-Lab/ANDES/rulesets?includes_parents=true",
+    "result": []
+  },
+  "limitations": [
+    "No administrative protection endpoint read or settings change",
+    "Snapshot is time-specific, not a claim that proposed rules are active",
+    "Hosted workflow has not run; local candidate not published"
+  ]
+}
