@@ -64,7 +64,7 @@ Only the foundational documentation is proposed now. Create future modules incre
 
 ### Verification
 
-The A1.3 catalog-contract candidate adds local checks; see [catalog contract](docs/catalog-contract.md) and [ADR-002](docs/decisions/ADR-002.md). After `uv sync --locked`, run `.venv/bin/python -m unittest discover -s tests -v`. The accepted upstream inventory has a separate `python3 upstream/check_inventory.py` consistency check. These checks do not establish native adapter, installation, or release readiness. A1.4 will establish CI. Review docs against Design v0.1, preserve the MIT license and public-safe boundary, and report missing evidence explicitly.
+The accepted A1.3 catalog contract adds local checks; see [catalog contract](docs/catalog-contract.md) and [ADR-002](docs/decisions/ADR-002.md). After `uv sync --locked`, run `.venv/bin/python -m unittest discover -s tests -v`. The accepted upstream inventory has a separate `python3 upstream/check_inventory.py` consistency check. A1.4's [development workflow candidate](docs/development-workflow.md) adds catalog CLI rejection checks, an offline secret scan and read-only GitHub Actions configuration; hosted execution remains unverified until publication. These checks do not establish native adapter, installation, protection enforcement, or release readiness. Review docs against Design v0.1, preserve the MIT license and public-safe boundary, and report missing evidence explicitly.
 
 ## Working with ChatGPT and Codex
 
