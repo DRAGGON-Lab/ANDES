@@ -1,0 +1,158 @@
+{
+  "method": "Connected GitHub GET: immutable raw files; no upstream code executed",
+  "date": "2026-11-27",
+  "files": [
+    {
+      "repository": "Gonza10V/ECx",
+      "revision": "50cd6f336652d6dc4c6760388553d2355d0c8839",
+      "path": "LICENSE",
+      "blob_sha": "b832b6f642312312367c07688dc7426db40a82ed",
+      "url": "https://github.com/Gonza10V/ECx/blob/50cd6f336652d6dc4c6760388553d2355d0c8839/LICENSE",
+      "status": "read_observed"
+    },
+    {
+      "repository": "Gonza10V/ECx",
+      "revision": "50cd6f336652d6dc4c6760388553d2355d0c8839",
+      "path": "skills/verification-loop/SKILL.md",
+      "blob_sha": "8713f2b78a927f330428475c72b5192d1839cfea",
+      "url": "https://github.com/Gonza10V/ECx/blob/50cd6f336652d6dc4c6760388553d2355d0c8839/skills/verification-loop/SKILL.md",
+      "status": "read_observed"
+    },
+    {
+      "repository": "Gonza10V/ECx",
+      "revision": "50cd6f336652d6dc4c6760388553d2355d0c8839",
+      "path": "skills/tdd-workflow/SKILL.md",
+      "blob_sha": "e7d5b2c303368573a20580b972f8ebc072939ef0",
+      "url": "https://github.com/Gonza10V/ECx/blob/50cd6f336652d6dc4c6760388553d2355d0c8839/skills/tdd-workflow/SKILL.md",
+      "status": "read_observed"
+    },
+    {
+      "repository": "affaan-m/ECC",
+      "revision": "4adeee6732a12d1540f49a4d50a38ce8c97f9a53",
+      "path": "LICENSE",
+      "blob_sha": "b832b6f642312312367c07688dc7426db40a82ed",
+      "url": "https://github.com/affaan-m/ECC/blob/4adeee6732a12d1540f49a4d50a38ce8c97f9a53/LICENSE",
+      "status": "read_observed"
+    },
+    {
+      "repository": "affaan-m/ECC",
+      "revision": "4adeee6732a12d1540f49a4d50a38ce8c97f9a53",
+      "path": "skills/verification-loop/SKILL.md",
+      "blob_sha": "32c1c5da8b6a6bb504396874c750cf34c98ad15c",
+      "url": "https://github.com/affaan-m/ECC/blob/4adeee6732a12d1540f49a4d50a38ce8c97f9a53/skills/verification-loop/SKILL.md",
+      "status": "read_observed"
+    },
+    {
+      "repository": "affaan-m/ECC",
+      "revision": "4adeee6732a12d1540f49a4d50a38ce8c97f9a53",
+      "path": "skills/tdd-workflow/SKILL.md",
+      "blob_sha": "b3286670a3c6ef0096e5991a76d59ff1c86196e3",
+      "url": "https://github.com/affaan-m/ECC/blob/4adeee6732a12d1540f49a4d50a38ce8c97f9a53/skills/tdd-workflow/SKILL.md",
+      "status": "read_observed"
+    },
+    {
+      "repository": "cursor/plugins",
+      "revision": "b7b93c36be9bcc36a74db438e0fd385d660bc559",
+      "path": "pstack/LICENSE",
+      "blob_sha": "6b5400237fdf6545be0b8fae370d6f2fcff8fb25",
+      "url": "https://github.com/cursor/plugins/blob/b7b93c36be9bcc36a74db438e0fd385d660bc559/pstack/LICENSE",
+      "status": "read_observed"
+    },
+    {
+      "repository": "cursor/plugins",
+      "revision": "b7b93c36be9bcc36a74db438e0fd385d660bc559",
+      "path": "pstack/skills/architect/SKILL.md",
+      "blob_sha": "0c1a1338ff46497bf9086abab9dd9c44d244cd66",
+      "url": "https://github.com/cursor/plugins/blob/b7b93c36be9bcc36a74db438e0fd385d660bc559/pstack/skills/architect/SKILL.md",
+      "status": "read_observed"
+    },
+    {
+      "repository": "cursor/plugins",
+      "revision": "b7b93c36be9bcc36a74db438e0fd385d660bc559",
+      "path": "pstack/skills/show-me-your-work/SKILL.md",
+      "blob_sha": "bf64d5de06efce56152c4a6030a084213c69b228",
+      "url": "https://github.com/cursor/plugins/blob/b7b93c36be9bcc36a74db438e0fd385d660bc559/pstack/skills/show-me-your-work/SKILL.md",
+      "status": "read_observed"
+    },
+    {
+      "repository": "mattpocock/skills",
+      "revision": "6f7f7831a625f040a8e06a0e7954826b87ce775a",
+      "path": "LICENSE",
+      "blob_sha": "f1dd2c09108dde1a5f56097cee8461b3ea834499",
+      "url": "https://github.com/mattpocock/skills/blob/6f7f7831a625f040a8e06a0e7954826b87ce775a/LICENSE",
+      "status": "read_observed"
+    },
+    {
+      "repository": "mattpocock/skills",
+      "revision": "6f7f7831a625f040a8e06a0e7954826b87ce775a",
+      "path": "skills/engineering/tdd/SKILL.md",
+      "blob_sha": "01eadaa34e7c9a63a67d6dc3cce1cc81b0e49985",
+      "url": "https://github.com/mattpocock/skills/blob/6f7f7831a625f040a8e06a0e7954826b87ce775a/skills/engineering/tdd/SKILL.md",
+      "status": "read_observed"
+    },
+    {
+      "repository": "mattpocock/skills",
+      "revision": "6f7f7831a625f040a8e06a0e7954826b87ce775a",
+      "path": "skills/engineering/wayfinder/SKILL.md",
+      "blob_sha": "975d6bf9c0a49d18a651f3335e0b4dcf8650fe31",
+      "url": "https://github.com/mattpocock/skills/blob/6f7f7831a625f040a8e06a0e7954826b87ce775a/skills/engineering/wayfinder/SKILL.md",
+      "status": "read_observed"
+    },
+    {
+      "repository": "google-research/dream-rsi",
+      "revision": "8ec35bd2538220517ce1bfca4282db21b8c518db",
+      "path": "LICENSE",
+      "blob_sha": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "url": "https://github.com/google-research/dream-rsi/blob/8ec35bd2538220517ce1bfca4282db21b8c518db/LICENSE",
+      "status": "read_observed"
+    },
+    {
+      "repository": "google-research/dream-rsi",
+      "revision": "8ec35bd2538220517ce1bfca4282db21b8c518db",
+      "path": "README.md",
+      "blob_sha": "ae112f30eeb778da1d9a0d62fab98b34955065b8",
+      "url": "https://github.com/google-research/dream-rsi/blob/8ec35bd2538220517ce1bfca4282db21b8c518db/README.md",
+      "status": "read_observed"
+    },
+    {
+      "repository": "isambard-sc/skills.isambard.ac.uk",
+      "revision": "6f83e53ddd78ff2ee8329a75fc05074529b45291",
+      "path": "README.md",
+      "blob_sha": "18dbb62945953f5a150855a1c26bb51e557cf336",
+      "url": "https://github.com/isambard-sc/skills.isambard.ac.uk/blob/6f83e53ddd78ff2ee8329a75fc05074529b45291/README.md",
+      "status": "read_observed"
+    },
+    {
+      "repository": "isambard-sc/skills.isambard.ac.uk",
+      "revision": "6f83e53ddd78ff2ee8329a75fc05074529b45291",
+      "path": "site/plugins/isambard/skills/brics-hpc-ai-code/SKILL.md",
+      "blob_sha": "17d93af783b97ce213ce7e9f1ca860c1c519f3a2",
+      "url": "https://github.com/isambard-sc/skills.isambard.ac.uk/blob/6f83e53ddd78ff2ee8329a75fc05074529b45291/site/plugins/isambard/skills/brics-hpc-ai-code/SKILL.md",
+      "status": "read_observed"
+    },
+    {
+      "repository": "isambard-sc/skills.isambard.ac.uk",
+      "revision": "6f83e53ddd78ff2ee8329a75fc05074529b45291",
+      "path": "LICENCE",
+      "blob_sha": "382f02a6f9fd8a58436675327ff0880920d844e1",
+      "url": "https://github.com/isambard-sc/skills.isambard.ac.uk/blob/6f83e53ddd78ff2ee8329a75fc05074529b45291/LICENCE",
+      "status": "read_observed"
+    },
+    {
+      "repository": "isambard-sc/skills.isambard.ac.uk",
+      "revision": "6f83e53ddd78ff2ee8329a75fc05074529b45291",
+      "path": "REUSE.toml",
+      "blob_sha": "9037a4b5308a4a03505963e8cb19ae203f238a8e",
+      "url": "https://github.com/isambard-sc/skills.isambard.ac.uk/blob/6f83e53ddd78ff2ee8329a75fc05074529b45291/REUSE.toml",
+      "status": "read_observed"
+    },
+    {
+      "repository": "isambard-sc/skills.isambard.ac.uk",
+      "revision": "6f83e53ddd78ff2ee8329a75fc05074529b45291",
+      "path": "LICENSES/LicenseRef-ARR.txt",
+      "blob_sha": "7fe7959ba891ca4b3c7bef4124030ce3ddb0fa6a",
+      "url": "https://github.com/isambard-sc/skills.isambard.ac.uk/blob/6f83e53ddd78ff2ee8329a75fc05074529b45291/LICENSES/LicenseRef-ARR.txt",
+      "status": "read_observed"
+    }
+  ]
+}
