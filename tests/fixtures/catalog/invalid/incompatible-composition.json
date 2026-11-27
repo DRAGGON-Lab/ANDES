@@ -1,0 +1,56 @@
+{
+  "expected_error": "incompatible composition",
+  "catalog": {
+    "schema_version": "1.0.0",
+    "components": [
+      {
+        "id": "andes.fixture.norms",
+        "version": "1.0.0",
+        "kind": "norm",
+        "description": "Synthetic constitution pointer",
+        "path": "content/norms.md",
+        "lifecycle": "active",
+        "requires": [],
+        "conflicts": [],
+        "provenance": {
+          "kind": "original",
+          "license": "MIT",
+          "attribution": "ANDES synthetic fixture"
+        }
+      },
+      {
+        "id": "andes.fixture.verify",
+        "version": "1.0.0",
+        "kind": "skill",
+        "description": "Synthetic direct invocation target",
+        "path": "content/verify.md",
+        "lifecycle": "active",
+        "requires": [
+          "andes.fixture.norms@1.0.0"
+        ],
+        "conflicts": [
+          "andes.fixture.norms@1.0.0"
+        ],
+        "invocation": "andes-fixture-verify",
+        "provenance": {
+          "kind": "original",
+          "license": "MIT",
+          "attribution": "ANDES synthetic fixture"
+        }
+      }
+    ],
+    "core": [
+      "andes.fixture.norms@1.0.0"
+    ],
+    "profiles": [
+      {
+        "id": "andes.fixture.bad",
+        "version": "1.0.0",
+        "description": "Incompatible",
+        "components": [
+          "andes.fixture.verify@1.0.0"
+        ]
+      }
+    ]
+  }
+}

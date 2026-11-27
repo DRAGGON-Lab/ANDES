@@ -1,0 +1,50 @@
+{
+  "expected_error": "unreviewed upstream",
+  "catalog": {
+    "schema_version": "1.0.0",
+    "components": [
+      {
+        "id": "andes.fixture.norms",
+        "version": "1.0.0",
+        "kind": "norm",
+        "description": "Synthetic constitution pointer",
+        "path": "content/norms.md",
+        "lifecycle": "active",
+        "requires": [],
+        "conflicts": [],
+        "provenance": {
+          "kind": "original",
+          "license": "MIT",
+          "attribution": "ANDES synthetic fixture"
+        }
+      },
+      {
+        "id": "andes.fixture.verify",
+        "version": "1.0.0",
+        "kind": "skill",
+        "description": "Synthetic direct invocation target",
+        "path": "content/verify.md",
+        "lifecycle": "active",
+        "requires": [
+          "andes.fixture.norms@1.0.0"
+        ],
+        "conflicts": [],
+        "invocation": "andes-fixture-verify",
+        "provenance": {
+          "kind": "upstream",
+          "license": "MIT",
+          "attribution": "Synthetic author",
+          "source_url": "https://example.invalid/source",
+          "revision": "0000000000000000000000000000000000000000",
+          "source_path": "SKILL.md",
+          "review_status": "pending",
+          "review_evidence": ""
+        }
+      }
+    ],
+    "core": [
+      "andes.fixture.norms@1.0.0"
+    ],
+    "profiles": []
+  }
+}

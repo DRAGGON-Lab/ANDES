@@ -1,0 +1,263 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ANDES local catalog contract v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "components",
+    "core",
+    "profiles"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "components": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/component"
+      }
+    },
+    "core": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*@[0-9]+\\.[0-9]+\\.[0-9]+(?![\\s\\S])"
+      }
+    },
+    "profiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "version",
+          "description",
+          "components"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*(?![\\s\\S])"
+          },
+          "version": {
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?![\\s\\S])"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "components": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*@[0-9]+\\.[0-9]+\\.[0-9]+(?![\\s\\S])"
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version",
+        "description",
+        "kind",
+        "path",
+        "lifecycle",
+        "requires",
+        "conflicts",
+        "provenance"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*(?![\\s\\S])"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?![\\s\\S])"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "norm",
+            "principle",
+            "skill",
+            "playbook",
+            "role",
+            "tool"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lifecycle": {
+          "enum": [
+            "draft",
+            "active",
+            "deprecated",
+            "retired"
+          ]
+        },
+        "requires": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*@[0-9]+\\.[0-9]+\\.[0-9]+(?![\\s\\S])"
+          }
+        },
+        "conflicts": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*@[0-9]+\\.[0-9]+\\.[0-9]+(?![\\s\\S])"
+          }
+        },
+        "invocation": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*(?![\\s\\S])"
+        },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "license",
+            "attribution"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "original",
+                "upstream"
+              ]
+            },
+            "license": {
+              "type": "string",
+              "minLength": 1
+            },
+            "attribution": {
+              "type": "string",
+              "minLength": 1
+            },
+            "source_url": {
+              "type": "string",
+              "pattern": "^https://[^\\s]+(?![\\s\\S])"
+            },
+            "revision": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{40}(?![\\s\\S])"
+            },
+            "source_path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "review_status": {
+              "enum": [
+                "pending",
+                "accepted",
+                "blocked"
+              ]
+            },
+            "review_evidence": {
+              "type": "string"
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "kind": {
+                    "const": "upstream"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "source_url",
+                  "revision",
+                  "source_path",
+                  "review_status",
+                  "review_evidence"
+                ]
+              },
+              "else": {
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "source_url"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "revision"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "source_path"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "review_status"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "review_evidence"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "skill"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "invocation"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "invocation"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

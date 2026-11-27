@@ -64,7 +64,7 @@ Only the foundational documentation is proposed now. Create future modules incre
 
 ### Verification
 
-There are no executable ANDES-specific checks yet. A1.4 and subsequent tasks establish documented CI and test entry points. Review the docs against Design v0.1, check links, preserve the MIT license, confirm public-safe contents and ensure no runtime commands are represented as working prematurely. Once code exists, run the actual checks documented in the repository; do not invent passing receipts.
+The A1.3 catalog-contract candidate adds local checks; see [catalog contract](docs/catalog-contract.md) and [ADR-002](docs/decisions/ADR-002.md). After `uv sync --locked`, run `.venv/bin/python -m unittest discover -s tests -v`. The accepted upstream inventory has a separate `python3 upstream/check_inventory.py` consistency check. These checks do not establish native adapter, installation, or release readiness. A1.4 will establish CI. Review docs against Design v0.1, preserve the MIT license and public-safe boundary, and report missing evidence explicitly.
 
 ## Working with ChatGPT and Codex
 
