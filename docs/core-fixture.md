@@ -1,10 +1,10 @@
 # Minimal core and candidate routing fixture — A1.5
 
-Issue #21 review candidate at baseline `1c77c37dd03dbdb24d17dee8ead1955573798e90`. A1.3/A1.4 are human-merged and the maintainer accepted A2.1/ADR-004 on 28 November 2026. Rigour L2; owner: skill engineer; reviewer: independent agent. Acceptance is unchanged: a fixture routes to the correct skill, direct invocation works in a candidate adapter fixture, unneeded references remain unloaded, and imported text is cleared.
+Accepted A1.5 implementation, merged in [PR #73](https://github.com/DRAGGON-Lab/ANDES/pull/73); [issue #21](https://github.com/DRAGGON-Lab/ANDES/issues/21) and epic #4 are closed at reviewed main `0f28ee50709354b255e39b325a37b8ce33ccc219`. Historical native/forward checks used their recorded candidate inputs and environments, including baseline `1c77c37`; this guide does not redate those observations. The accepted bounded criteria and limits are reconciled in [foundation closeout](evidence/foundation-closeout.md).
 
 ## Core and boundary
 
-`catalog/core.json` uses the accepted catalog contract for the Constitution, routing pointers and four focused workflows: andes-orient, andes-contract, andes-verify and andes-handoff. The instructions are original ANDES text derived from its approved policy; no third-party skill bodies were imported. All six components are mandatory catalog selections, which does not mean every skill body enters context. Component version 0.1.0 identifies this candidate, not an installable release.
+`catalog/core.json` uses the accepted catalog contract for the Constitution, routing pointers and four focused workflows: andes-orient, andes-contract, andes-verify and andes-handoff. The instructions are original ANDES text derived from its approved policy; no third-party skill bodies were imported. All six components are mandatory catalog selections, which does not mean every skill body enters context. Component version 0.1.0 identifies the source core; the projection remains a candidate test fixture, not an installable release.
 
 The router points to one workflow for the current need; explicit invocation bypasses routing while retaining policy and permissions. There is no new orchestration service, general classifier, installer, global configuration or domain profile.
 
@@ -19,6 +19,8 @@ The router points to one workflow for the current need; explicit invocation bypa
 The independent task execution and native loading checks are complementary. The task is executed by the current agent host; the sandboxed CLI proves the selected instructions reach its model-input boundary. No claim is made that the sandboxed CLI itself chose the skill implicitly or reasoned over the task. Those broader behaviors are not enabled or certified here.
 
 ## Reproduction
+
+First run `uv sync --locked` in the source checkout. The first two commands are local checks. The last two are optional manual fixture reproductions on the recorded macOS environment, requiring their own current authorization; they are not installation or successful-inference commands. This documentation closeout does not rerun them.
 
 ```sh
 .venv/bin/python -m unittest discover -s tests -v
@@ -37,4 +39,4 @@ The native probe is separate from ordinary Linux CI. Its intentional provider er
 
 The normalized forward report, real failing-test output and boundary-case results are in `docs/evidence/a1-5-forward*`. Input fingerprints and unchanged-input assertions tie the result to the synthetic case. Only the verification skill body was reported read; native request inspection separately establishes absence of the other bodies/reference at the captured input boundary.
 
-The acceptance packet and file manifest are in `docs/evidence/a1-5.md` and `a1-5-manifest.sha256`. Independent review must assess the stated fixture coverage, including the distinction between routing in the agent host and loading in the CLI. Human acceptance is pending. No installation, protected settings change, merge, release or epic closure follows from local checks.
+The [historical acceptance packet](evidence/a1-5.md) and its original manifest preserve the independent review and exact candidate identities, including the distinction between routing in the agent host and loading in the CLI. Subsequent human acceptance, merges, hosted CI and closure are linked in [foundation closeout](evidence/foundation-closeout.md). They do not establish installation, administrative protection or release readiness.

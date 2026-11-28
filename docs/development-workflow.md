@@ -1,43 +1,45 @@
 # Foundation development workflow
 
-A1.4 / issue #18 review candidate, L2. Owner: platform engineer; reviewer: independent security agent. Prerequisites A1.1 and A1.3 accepted. This task adds templates, local checks and a proposed GitHub Actions workflow. It does not apply protection settings, publish a candidate or authorize merge/release.
+The A1.4 checks/templates and subsequent A1.5 core check are implemented, accepted and merged. Issues [#18](https://github.com/DRAGGON-Lab/ANDES/issues/18) and [#4](https://github.com/DRAGGON-Lab/ANDES/issues/4) are closed. [Current reconciliation](evidence/foundation-closeout.md) links the reviewed main revision, acceptance and hosted results. Repository protection remains an unapplied administrative recommendation, not a property conferred by CI.
 
 ## Local and CI verification
 
-After `uv sync --locked`, run:
+With uv and Python 3.12+ available, run from the repository root:
 
 ```sh
+uv sync --locked
 .venv/bin/python -m unittest discover -s tests -v
 .venv/bin/python scripts/check_catalog_fixtures.py
+.venv/bin/python scripts/validate_catalog.py catalog/core.json --root .
 .venv/bin/python upstream/check_inventory.py
 .venv/bin/python scripts/check_secrets.py
+git diff --check
 ```
 
-The catalog fixture check invokes the real validator CLI: one valid catalog must exit 0, and all seven invalid catalogs must exit 1 with the expected rejection category. An unexpected pass, rejection, diagnostic or missing fixture fails the check. This is separate from unit assertions. The inventory check covers source/provenance metadata consistency; it is not license clearance.
+uv installs the locked verification dependencies into `.venv`; it may use/download a managed interpreter and package cache. It does not install ANDES into a real Codex home. Record the actual revision, dirty state, inputs, environment, results and omissions for each substantial run.
 
-`.github/workflows/foundation.yml` runs these commands on pull requests and main pushes using an Ubuntu runner, Python 3.12, pinned uv, the committed lockfile and full-SHA action references. The job has read-only contents permission, checkout does not persist credentials, caches are disabled, no secrets or write tokens are passed to tests, and untrusted PR code is never run in a privileged `pull_request_target` context. Dependency setup uses network access; the tests/checks do not require it. No deployment, publication or GitHub mutation step exists. The job timeout is ten minutes.
+The catalog fixture check invokes the real validator CLI: one valid catalog must exit 0, and all seven invalid catalogs must exit 1 with the expected category. Unexpected status/diagnostics or missing cases fail it. The separate core check validates the actual source catalog. The inventory check verifies source/provenance metadata consistency, not legal clearance.
+
+`.github/workflows/foundation.yml` runs the checks on pull requests and main pushes using Ubuntu, Python 3.12, uv 0.13.10, full-SHA actions and the committed lockfile. Its job has contents-read permission, nonpersisted checkout credentials, disabled caches, no supplied secrets/write tokens and a ten-minute timeout. It does not use privileged pull_request_target execution or deploy/publish/mutate GitHub. Dependency setup needs network; tests/checks do not. [Hosted checks passed at reviewed main](https://github.com/DRAGGON-Lab/ANDES/actions/runs/46088248359); a closeout-local rerun is a distinct observation, not a new hosted run.
+
+## Native fixtures are separate
+
+The accepted [compatibility probe](codex-compatibility.md) and [core loading fixture](core-fixture.md) have recorded independent macOS ARM64 evidence for CLI 0.172.0. They are not run by ordinary Linux CI and do not establish cross-platform native compatibility.
+
+The core capture observes explicit skill-input assembly and absent unneeded bodies/references; its endpoint is configured for an error without inference. It does not verify native implicit matching, successful native inference, relative-reference following, role execution, production plugin installation or release installation/rollback. Manual reproduction needs its own appropriate environment and authorization; the documentation closeout does not rerun these probes.
 
 ## Secret scan policy and limits
 
-The pinned detect-secrets 1.5.0 library is used with an explicit list of pattern detectors. No entropy detector, online verification, custom external plugin, global baseline or user configuration is loaded. It scans tracked and non-ignored untracked working-tree files; in CI these are the candidate checkout. It does not scan history or ignored files and is not a guarantee that arbitrary confidential data will be recognized.
+Pinned detect-secrets 1.5.0 uses explicit offline pattern detectors plus the reviewed inline-allowlist filter. No entropy detector, online credential verification, external plugin, global baseline or personal configuration is loaded. It scans tracked and non-ignored untracked working-tree files, not history/ignored files, and cannot guarantee detection of arbitrary confidential data.
 
-Only path, line and detector type are emitted, JSON escaped; scanner source output and exception details are suppressed. Exit 0 means no pattern finding, 1 means potential secrets, 2 means scanner failure/unscannable input. Symlinks and files outside the selected root fail rather than being followed. All files currently in this text-only repository are in scope; binary support is not claimed.
+Only JSON-escaped path, line and detector type are emitted; raw matching values and third-party diagnostics are suppressed. Exit 0 means no pattern finding, 1 means potential secrets, and 2 means scanner failure/unscannable input. Symlinks/outside-root inputs fail rather than being followed. Binary support is not claimed.
 
-The standard inline allowlist filter is enabled for reviewed false positives. The sole initial exception is the public `detect-secrets==1.5.0` package declaration in pyproject.toml. Additions to these annotations require human review; this CI check cannot prevent a candidate from changing its own scanner or suppressions. Never paste a detected credential into an issue, PR, test expectation, baseline or log; review privately and rotate actual credentials through the appropriate owner. Negative tests generate a synthetic value in a temporary file and check both rejection and absence of that value from stdout/stderr.
+The initial inline exception is the public detect-secrets package declaration in pyproject.toml. Human review is required for suppression/scanner changes; a candidate cannot provide independent enforcement of its own checks. Review actual findings privately and handle real credentials through the appropriate owner, never by pasting them into logs, fixtures, issues or PRs. Synthetic tests cover rejection, redaction, failure and absence of online verification.
 
-## Proposed protection rules — not applied
+## Administrative protection decision
 
-Once the workflow has a successful hosted run and the maintainer approves the exact administrative change:
+[Repository protection recommendation](repository-protection.md) specifies pull requests, exact check identity/source, human review, resolved conversations, force/deletion restrictions, sole-maintainer implications and rollback. It is explicit but **unapplied**. The [read-only settings snapshot](evidence/foundation-settings-observed.json) reports main unprotected and no listed rulesets; detailed protection settings returned 403 to the integration. Recheck them with authorized administrative access before any separately approved application.
 
-- Protect main with pull requests and at least one independent human approval; dismiss stale approvals and require approval after the most recent push.
-- Require the `Foundation checks` check from GitHub Actions against the current candidate and require resolved review conversations.
-- Disallow force pushes and branch deletion; restrict bypass/administrative exceptions to accountable maintainers and record any exception.
-- Preserve read-only default workflow permissions and separately restricted release credentials. No test job receives release or administration authority.
+## Evidence and acceptance
 
-Before applying, verify plan/organization capabilities, permissions, exact required-check identity and availability of another human reviewer. Record any unsupported rule; do not silently substitute weaker protection or lock out the sole maintainer. A separate human administrative action is required. A workflow and tests are not an enforcement boundary when a PR can modify both.
-
-## Observed settings and acceptance
-
-The independent read-only snapshot is in `docs/evidence/a1-4-settings-observed.json`: main reported `protected: false` at baseline `5b838b1`, and the ruleset listing including parent rulesets was empty on 27 November 2026. The proposal above is not active protection.
-
-Local pass/fail evidence and independent review belong in `docs/evidence/a1-4.md`. Hosted GitHub Actions behavior, effective permissions and protection enforcement remain unverified until the concrete candidate is published and observed. #18 and #4 must not be closed as fully verified based solely on local runs. Human acceptance is separate from merge/release authority.
+[Historical receipts](evidence/README.md) preserve original revisions, failures and pending statements. Their later acceptance, merges and hosted results are reconciled in [foundation closeout](evidence/foundation-closeout.md). Foundation acceptance does not clear future upstream imports or authorize a release, later-task implementation, settings changes or production installation.
