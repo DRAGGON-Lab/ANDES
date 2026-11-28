@@ -2,74 +2,59 @@
 
 **Agentic Norms for Disciplined Engineering and Science**
 
-ANDES is DRAGGON Lab's framework for rigorous AI-assisted software engineering, scientific research and researcher development. It connects researchers, reusable engineering methods, bounded agent teams, deterministic tools and auditable evidence. The aim is reliable knowledge and independent human competence, not simply more AI-generated output.
+ANDES is DRAGGON Lab's framework for rigorous AI-assisted software engineering, scientific research and researcher development. It connects reusable methods, deterministic tools, auditable evidence and accountable human review.
 
-**Status:** design approved; initial documentation under review. No installable ANDES release, native adapter, mission runtime or evaluator is available in this repository at the inspected bootstrap baseline. Design v0.1 is not a software release number.
+**Status:** the [A1 foundation epic](https://github.com/DRAGGON-Lab/ANDES/issues/4) and prerequisite [A2.1 compatibility spike](https://github.com/DRAGGON-Lab/ANDES/issues/3) are accepted and closed at reviewed main `0f28ee50709354b255e39b325a37b8ce33ccc219`. [Hosted Foundation checks passed](https://github.com/DRAGGON-Lab/ANDES/actions/runs/46088248359). This is a source-level foundation, not an installable or released ANDES product. A1 acceptance does not complete M1's planned distribution gates.
 
-## What ANDES will provide
+## Implemented foundation
 
-- A compact versioned core, composable domain profiles and focused skills for engineering, mathematical reasoning, reproducible research and learning.
-- Proportional task contracts, progressive project context, evidence-based verification, GitHub communication and recoverable handoffs.
-- Codex-first integration with portable canonical skill definitions, preserving personal configuration and credentials.
-- Dedicated scientific profiles, including HPC and Bristol Isambard script development using vetted official guidance.
-- Dynamic agent teams, bounded long-running missions, Arena and Dreaming, introduced only after their respective safeguards and evaluation gates pass.
-- Scientific writing and presentation workflows that use [Neruda](https://github.com/DRAGGON-Lab/Neruda), a separately versioned, independently usable document framework.
-
-ANDES is independent of ECx. Existing personal experiments and runtime assumptions are not mandatory dependencies. Selected upstream methods enter through reviewed adaptation and provenance records.
-
-## Start here
-
-| Document | Purpose |
+| Capability | Implementation and evidence |
 |---|---|
-| [PRODUCT.md](PRODUCT.md) | Users, scope, workflows and success criteria |
-| [ARCHITECTURE.md](ARCHITECTURE.md) | Component boundaries, integration and planned delivery |
-| [CONSTITUTION.md](CONSTITUTION.md) | Norms, rigour and evidence requirements |
-| [AGENTS.md](AGENTS.md) | Compact agent startup entry |
-| [AGENT.md](AGENT.md) | ChatGPT/Codex coordination and execution rules |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | Contribution, review and release governance |
-| [Design baseline](docs/design-baseline.md) | Approved decision references and authority |
-| [ADR-001](docs/decisions/ADR-001.md) | Independent modular core and adapter boundary |
+| Canonical catalog and profile contracts | Versioned JSON Schema, local dependency/composition/provenance validation, positive fixture and seven negative fixtures; [contract](docs/catalog-contract.md). |
+| Four original core skills | Orient, contract, verify and handoff, with progressive [routing pointers](skills/ROUTING.md) and [core catalog](catalog/core.json). |
+| Temporary project-local Codex projection | Candidate-only adapter preserving source bytes; no personal installation. [Bounded forward test and explicit native loading](docs/core-fixture.md) were independently reviewed. |
+| Native compatibility probes | Recorded discovery, instruction-source ordering and metadata evidence for Codex 0.172.0 on macOS ARM64; [capability matrix](docs/codex-compatibility.md). |
+| Automated verification | 25 unit tests, catalog CLI acceptance/rejection, core/provenance checks and redacted offline secret scanning in [GitHub Actions](.github/workflows/foundation.yml). |
+| Upstream provenance inventory | Six pinned sources and ten examined candidates; [inventory](upstream/README.md). Inventory acceptance does not clear future copying. |
 
-## Development status and local setup
+The [current-state reconciliation](docs/evidence/foundation-closeout.md) links accepted tasks, merged PRs, ADRs and dated evidence. [Historical receipts](docs/evidence/README.md) retain their original inputs, failures, omissions and fingerprints.
 
-Once this bootstrap is approved and merged, clone the repository using your authorized Git account and inspect the actual checkout:
+## Local setup and verification
+
+Prerequisites: Git, uv and Python 3.12+. Foundation verification used uv 0.13.10; the CI workflow pins that version. uv may acquire a managed interpreter/dependency cache; dependencies are installed in the project-local `.venv`. This does not install ANDES into Codex.
 
 ```sh
 git clone https://github.com/DRAGGON-Lab/ANDES.git
 cd ANDES
 git rev-parse HEAD
 git status --short
+uv sync --locked
+.venv/bin/python -m unittest discover -s tests -v
 ```
 
-At the pre-bootstrap revision these are source-inspection steps only; there is no ANDES installer or test runner to invoke. Read the current repository instructions and selected approved work item before editing. The first technical work is an upstream licensing/inventory audit (A1.2) and an isolated native Codex compatibility spike (A2.1). The latter must establish real discovery, precedence, role support and packaging evidence. Do not assume ECx's Node runtime, a native plugin path or a particular CLI.
+Use an existing authorized checkout instead of cloning again when appropriate. Run the [complete verification sequence](docs/development-workflow.md#local-and-ci-verification) before handoff. It includes the seven-negative catalog fixture check, core validation, provenance, secret scan and `git diff --check`.
 
-### Planned layout
+Native probes are separate manual macOS fixtures, not ordinary Linux CI or installation commands. See their environment, isolation and approval requirements in the [compatibility report](docs/codex-compatibility.md) and [core fixture guide](docs/core-fixture.md).
 
-```text
-ANDES/
-  README.md  PRODUCT.md  ARCHITECTURE.md
-  CONSTITUTION.md  AGENTS.md  AGENT.md  CONTRIBUTING.md
-  docs/                     approved design pointers and ADRs
-  skills/ principles/       canonical focused guidance
-  profiles/ playbooks/      compatible composition and workflows
-  agents/ schemas/          bounded roles and contracts
-  adapters/codex/           tested native integration
-  templates/ upstream/      reusable templates and provenance
-  tests/ examples/          synthetic positive/negative fixtures
-  runtime/                  deterministic mechanisms as needed
-  evaluations/ dreaming/    staged experimental capabilities
-```
+## Verified limits and planned product
 
-Only the foundational documentation is proposed now. Create future modules incrementally when there is an accepted task and defined responsibility. No frontend, network service, database or Docker Compose deployment is required at bootstrap. Use isolated temporary homes for the adapter spike; containers are an option for reproducible tests or later containment, not a substitute for validating native behavior.
+The bounded evidence establishes independent agent workflow selection/execution and actual explicit CLI skill-input assembly. It does **not** verify native implicit routing, successful native model inference, native relative-reference following, native role execution, production plugin installation, cross-platform native compatibility, or release installation/update/rollback. These are not supported foundation claims; this does not assert that Codex itself lacks those capabilities.
 
-### Verification
+Pinned distribution, domain/scientific and HPC profiles, Neruda integration, mission coordination, Arena and Dreaming remain planned capabilities under separate tasks and gates. No production installer, general runtime, release resolver or release is provided. ANDES remains independent of ECx, and [Neruda](https://github.com/DRAGGON-Lab/Neruda) remains separately versioned.
 
-The accepted A1.3 catalog contract adds local checks; see [catalog contract](docs/catalog-contract.md) and [ADR-002](docs/decisions/ADR-002.md). After `uv sync --locked`, run `.venv/bin/python -m unittest discover -s tests -v`. The accepted upstream inventory has a separate `python3 upstream/check_inventory.py` consistency check. A1.4's [development workflow candidate](docs/development-workflow.md) adds catalog CLI rejection checks, an offline secret scan and read-only GitHub Actions configuration; hosted execution remains unverified until publication. These checks do not establish native adapter, installation, protection enforcement, or release readiness. Review docs against Design v0.1, preserve the MIT license and public-safe boundary, and report missing evidence explicitly.
+## Start here
 
-## Working with ChatGPT and Codex
-
-Use ChatGPT for investigation, decision reduction, task contracts and architecture review. Use Codex for explicitly authorized, scoped changes and executable evidence. Humans accept requirements, consequential decisions and stable releases. Start each session from [AGENTS.md](AGENTS.md); work in small verified slices under XP + Kanban. See [CONTRIBUTING.md](CONTRIBUTING.md).
+| Document | Purpose |
+|---|---|
+| [AGENTS.md](AGENTS.md) / [AGENT.md](AGENT.md) | Startup instructions, task authority, coordination and handoff |
+| [CONSTITUTION.md](CONSTITUTION.md) | Mandatory norms, rigour and evidence requirements |
+| [PRODUCT.md](PRODUCT.md) / [ARCHITECTURE.md](ARCHITECTURE.md) | Product targets, implemented boundaries and remaining roadmap |
+| [Development workflow](docs/development-workflow.md) | Setup, local/hosted checks and secret-scan limits |
+| [Design baseline](docs/design-baseline.md) / [ADRs](docs/decisions/) | Approved direction and consequential decisions |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Public/private boundaries, review and release governance |
 
 ## Governance and license
 
-Public infrastructure, private research, controlled stable releases. Unpublished evidence, private agent histories, personal learning records, credentials, protected graders and restricted data do not belong here. Public development does not imply release approval. Original code uses the existing [MIT license](LICENSE); upstream components retain their applicable notices and permissions. Review any contribution for university IP, confidentiality, security and third-party terms before publication.
+Public infrastructure, private research, controlled stable releases. Unpublished evidence, private histories, credentials and protected evaluation data do not belong here. Original code uses the existing [MIT license](LICENSE); upstream terms remain applicable.
+
+[Repository protection is proposed, not applied](docs/repository-protection.md). A passing workflow is not a required merge check unless repository settings enforce it. Human acceptance, administrative changes, publication and stable release authority remain separate.

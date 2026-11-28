@@ -1,6 +1,6 @@
 # Agent collaboration guide
 
-Read [AGENTS.md](AGENTS.md) for the startup entry and [CONSTITUTION.md](CONSTITUTION.md) for the normative rules. This file is the operational coordination guide, not a separate policy or a grant of permissions.
+Read [AGENTS.md](AGENTS.md) for the startup entry and [CONSTITUTION.md](CONSTITUTION.md) for the normative rules. This file is the operational coordination guide, not a separate policy or a grant of permissions. The [foundation closeout](docs/evidence/foundation-closeout.md) records accepted A1/A2.1 work; do not reimplement it under later tasks.
 
 ## Roles
 
@@ -18,13 +18,13 @@ Read [AGENTS.md](AGENTS.md) for the startup entry and [CONSTITUTION.md](CONSTITU
 
 ## Execution and verification rules
 
-Use behavior-driven TDD for meaningful changes where practical: reproduce, define an independent observable check, implement the smallest correction, refactor and rerun. Write tests for non-trivial logic and failure paths. If failing-first is impractical, explain why and use the closest meaningful check. Never weaken protected tests. Update docs, provenance and ADRs when accepted behavior changes. Do not invent a test command or claim a pass without execution; bootstrap has no code test runner. If CI/container workflows exist later, keep them working and use verified commands; no container setup is required today.
+Use behavior-driven TDD for meaningful changes where practical: reproduce, define an independent observable check, implement the smallest correction, refactor and rerun. Write tests for non-trivial logic and failure paths. If failing-first is impractical, explain why and use the closest meaningful check. Never weaken protected tests. Update docs, provenance and ADRs when accepted behavior changes. Do not invent a test command or claim a pass without execution; the [development workflow](docs/development-workflow.md) lists the implemented test, catalog, provenance and secret checks. Keep hosted Foundation checks working. Native probes have separate recorded macOS environments and are not part of ordinary Linux CI; no container setup is required.
 
 Use the separate quality dimensions and statuses from the Constitution. Distinguish code correctness, mathematical/numerical correctness, scientific validity, reproducibility and human understanding. Preserve negative and timed-out attempts. For an L2/L3 task, independent review at exact revision is required; report reproduced defects, statically established violations and unverified risks separately. Independent review does not override human acceptance.
 
 ## Boundaries and escalation
 
-Routine read-only investigation and explicitly scoped implementation/test execution are allowed only within granted access and budget. Escalate requirement or interface changes, material dependencies, installation/repair, protected evaluation changes, sensitive data, unsafe or irreversible operations, costs, production, remote jobs, publication or scope/budget extensions. No agent may independently approve canonical releases, protected branch merge, resource expansion, permission changes, deletion of important data or sharing restricted records. The current bootstrap is review-only: no repository writes, settings changes, commits, issues or PRs. Review authorization is not publication authorization.
+Routine read-only investigation and explicitly scoped implementation/test execution are allowed only within granted access and budget. Escalate requirement or interface changes, material dependencies, installation/repair, protected evaluation changes, sensitive data, unsafe or irreversible operations, costs, production, remote jobs, publication or scope/budget extensions. No agent may independently approve canonical releases, protected branch merge, resource expansion, permission changes, deletion of important data or sharing restricted records. Repository edits and checks are permitted within an explicitly authorized task; retain authorization already granted in the session. These instruction files do not independently authorize GitHub publication, administrative settings, protected merges or releases. Review authorization is not publication authorization.
 
 A long-running mission needs an independently enforceable approved contract, protected gates, bounded retries, checkpoints, cancellation and recovery. If enforcement is unavailable, stop rather than rely on a prompt. Any changes to protected criteria need recorded human approval. Never confuse a budget-exhausted or blocked task with a successful one.
 

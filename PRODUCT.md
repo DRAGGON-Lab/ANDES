@@ -1,6 +1,6 @@
 # ANDES product definition
 
-**Status:** approved product direction (Design v0.1); bootstrap wording for maintainer review. See [design baseline](docs/design-baseline.md) for decision IDs. This is not a claim of implemented functionality.
+**Status:** approved product direction (Design v0.1), with the A1 foundation and A2.1 spike accepted and closed at reviewed main `0f28ee50709354b255e39b325a37b8ce33ccc219`. ANDES means **Agentic Norms for Disciplined Engineering and Science**. See [design baseline](docs/design-baseline.md) and [acceptance reconciliation](docs/evidence/foundation-closeout.md). ANDES is not an installable or released product.
 
 ## Problem
 
@@ -22,7 +22,15 @@ Goals: improve functional and engineering quality, mathematical and scientific v
 
 Non-goals: replacing accountable researchers; guaranteeing scientific truth from code execution; grading students automatically; replacing Codex or building a universal agent runtime at inception; importing every upstream skill; requiring a centralized service, vector database or permanent team; self-authorizing releases, protected merges, spending or remote/laboratory operations. No private transcript collection by default. No general-purpose GUI or SaaS in the initial scope.
 
-## Primary workflows
+## Implemented foundation and remaining product
+
+The implemented foundation contains canonical catalog/profile contracts, four original core skills, temporary project-local Codex projection, native compatibility/loading probes, an upstream provenance inventory and automated local/hosted checks. It has bounded independent agent workflow-selection evidence and explicit native skill-input assembly evidence for the recorded macOS ARM64 environment.
+
+This is not native implicit-routing, successful native model-inference, relative-reference-following, role-execution, production-plugin-installation, cross-platform-native-compatibility or release-installation/rollback verification. The [core fixture](docs/core-fixture.md) and [compatibility matrix](docs/codex-compatibility.md) state the exact limits. Profile composition contracts exist; production domain profiles and distribution do not.
+
+## Target workflows
+
+The following are product outcomes, not a claim that every workflow is implemented. The implemented slice is described above; later capabilities require separate authorized tasks.
 
 | Workflow | Expected result |
 |---|---|
@@ -50,9 +58,9 @@ Autonomous mode is an execution policy, not an educational mode; scientific rigo
 | M6 evolution | Evaluations, retrospective, candidate improvement and Dreaming | Independent protected graders, complete attempts, replay coverage and fresh held-out live verification; human promotion (G6/G7) |
 | Integrated pilot | Approved researcher adoption | Consented/authorized use, usability and understanding evidence, support, rollback and human acceptance (G8) |
 
-Initial MVP: M1 plus the first useful M2 engineering/learning slice (A2.5 and A4.5 are planned frontiers after prerequisites). Deliver a real tested native workflow rather than speculative broad interfaces. Scientific profiles and Neruda may be developed in parallel once their dependencies permit. Autonomy and Dreaming remain disabled or experimental until their release gates are satisfied.
+A1 acceptance completes the foundation epic, not M1's distribution/install/update/rollback gates. Initial MVP remains M1 plus the first useful M2 engineering/learning slice (A2.5 and A4.5 are planned frontiers after prerequisites). Deliver a real tested native workflow rather than speculative broad interfaces. Scientific profiles and Neruda may be developed in parallel once their dependencies permit. Autonomy and Dreaming remain disabled or experimental until their release gates are satisfied.
 
-## Success criteria
+## Product success criteria
 
 - An authorized researcher can install a pinned release, discover the relevant workflow, complete a bounded task and resume from an evidence-bearing handoff.
 - A reviewer can trace each accepted claim to the actual revision, inputs, method and checks; failed, partial and not-run checks remain visible.
@@ -64,4 +72,4 @@ Measure accepted-task throughput, elapsed/blocked/review time, observed defects,
 
 ## Constraints and priorities
 
-Core compact and versioned; profiles composable; Codex first, portable canonical representation; Neruda standalone; ECx independent. Prefer behavioral tests and deterministic validators over redundant prompt instructions. Use public-safe synthetic examples; private project evidence stays under project ownership. Scope, compatibility, packaging and deployment decisions require documented validation. Follow the approved XP + Kanban operating model in [CONTRIBUTING.md](CONTRIBUTING.md). Unknown native interfaces, language choice, support matrix, sample sizes and staffing are implementation discovery, not approved technical facts.
+Core compact and versioned; profiles composable; Codex first, portable canonical representation; Neruda standalone; ECx independent. Prefer behavioral tests and deterministic validators over redundant prompt instructions. Use public-safe synthetic examples; private project evidence stays under project ownership. Scope, compatibility, packaging and deployment decisions require documented validation. Follow the approved XP + Kanban operating model in [CONTRIBUTING.md](CONTRIBUTING.md). Python 3.12+, uv and locked validation dependencies are selected for the existing foundation tooling. Production distribution, remaining native interfaces, a broader support matrix, sample sizes and staffing remain separate implementation/discovery decisions, not approved technical facts.

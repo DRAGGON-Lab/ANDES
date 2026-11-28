@@ -1,0 +1,38 @@
+{
+  "observed_at": "2026-11-28 00:42:26 UTC",
+  "repository": "DRAGGON-Lab/ANDES",
+  "method": "Read-only connected GitHub GET; no administrative mutation",
+  "branch": {
+    "url": "https://api.github.com/repos/DRAGGON-Lab/ANDES/branches/main",
+    "name": "main",
+    "sha": "0f28ee50709354b255e39b325a37b8ce33ccc219",
+    "protected": false
+  },
+  "rulesets": {
+    "url": "https://api.github.com/repos/DRAGGON-Lab/ANDES/rulesets?includes_parents=true",
+    "includes_parents": true,
+    "returned_rulesets": []
+  },
+  "detailed_branch_protection": {
+    "url": "https://api.github.com/repos/DRAGGON-Lab/ANDES/branches/main/protection",
+    "http_status": 403,
+    "error_code": "FORBIDDEN",
+    "message": "Resource not accessible by integration",
+    "checked_on": "2026-11-28",
+    "limitation": "Not a not-found result; detailed classic protection settings and admin/bypass permissions were not inspected."
+  },
+  "foundation_check": {
+    "name": "Foundation checks",
+    "source": {
+      "app_id": 15368,
+      "slug": "github-actions"
+    },
+    "head_sha": "0f28ee50709354b255e39b325a37b8ce33ccc219",
+    "status": "completed",
+    "conclusion": "success",
+    "run_url": "https://github.com/DRAGGON-Lab/ANDES/actions/runs/46088248359",
+    "job_url": "https://github.com/DRAGGON-Lab/ANDES/actions/runs/46088248359/job/140802816415",
+    "enforcement": "Operational; no required-check enforcement observed in the available branch/ruleset reads."
+  },
+  "settings_changes_applied": false
+}

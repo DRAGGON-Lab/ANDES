@@ -1,0 +1,134 @@
+{
+  "attempt": "foundation-documentation-closeout-2026-11-28",
+  "rigour": "L2",
+  "mode": "Delegate",
+  "base_revision": "0f28ee50709354b255e39b325a37b8ce33ccc219",
+  "branch": "docs/foundation-closeout",
+  "input_state": "Reviewed base plus documentation-only working-tree diff. Current documentation fingerprints are in foundation-closeout-manifest.sha256; historical manifests are unchanged.",
+  "checks_observed_at_utc": "2026-11-28 00:57:19 UTC",
+  "environment": {
+    "os": "Darwin",
+    "architecture": "arm64",
+    "python": "3.12.16",
+    "uv": "0.13.10 (Homebrew 2026-11-24 aarch64-apple-darwin)"
+  },
+  "scope": "Reconcile current operational documentation, preserve dated evidence, prepare unapplied administrative recommendation. No source implementation, dependency, workflow, catalog, skill or test changes.",
+  "checks": [
+    {
+      "command": "uv sync --locked",
+      "status": "pass",
+      "exit_code": 0,
+      "output": "Resolved 14 packages in 4ms; Checked 13 packages in 14ms",
+      "prior_attempt": {
+        "exit_code": 2,
+        "result": "Sandbox could not create cache temporary file outside workspace; no dependency failure established."
+      },
+      "retry": "Authorized escalated retry accessed existing uv cache; no lockfile change."
+    },
+    {
+      "command": ".venv/bin/python -m unittest discover -s tests -v",
+      "status": "pass",
+      "exit_code": 0,
+      "output": "test_cli_exit_status_and_json_output (test_catalog.CatalogTests.test_cli_exit_status_and_json_output) ... ok\ntest_dependency_closure_is_deterministic (test_catalog.CatalogTests.test_dependency_closure_is_deterministic) ... ok\ntest_duplicate_invocations_are_rejected (test_catalog.CatalogTests.test_duplicate_invocations_are_rejected) ... ok\ntest_identifier_fields_reject_trailing_newline (test_catalog.CatalogTests.test_identifier_fields_reject_trailing_newline) ... ok\ntest_minimal_core_and_direct_invocation (test_catalog.CatalogTests.test_minimal_core_and_direct_invocation) ... ok\ntest_native_metadata_is_not_canonical (test_catalog.CatalogTests.test_native_metadata_is_not_canonical) ... ok\ntest_nul_path_returns_validation_error (test_catalog.CatalogTests.test_nul_path_returns_validation_error) ... ok\ntest_path_escape_and_missing_content (test_catalog.CatalogTests.test_path_escape_and_missing_content) ... ok\ntest_profile_pair_conflict_is_not_silently_overridden (test_catalog.CatalogTests.test_profile_pair_conflict_is_not_silently_overridden) ... ok\ntest_published_invalid_fixtures (test_catalog.CatalogTests.test_published_invalid_fixtures) ... ok\ntest_schema_is_valid_and_unsupported_version_is_rejected (test_catalog.CatalogTests.test_schema_is_valid_and_unsupported_version_is_rejected) ... ok\ntest_symlink_escape_is_rejected (test_catalog.CatalogTests.test_symlink_escape_is_rejected) ... ok\ntest_unknown_selection_is_rejected (test_catalog.CatalogTests.test_unknown_selection_is_rejected) ... ok\ntest_unsupported_and_blank_licenses_are_rejected (test_catalog.CatalogTests.test_unsupported_and_blank_licenses_are_rejected) ... ok\ntest_all_four_direct_targets_are_valid (test_core.CoreTests.test_all_four_direct_targets_are_valid) ... ok\ntest_native_frontmatter_matches_the_catalog (test_core.CoreTests.test_native_frontmatter_matches_the_catalog) ... ok\ntest_native_selection_rejects_ambiguous_names (test_core.CoreTests.test_native_selection_rejects_ambiguous_names) ... ok\ntest_projection_is_temporary_and_content_preserving (test_core.CoreTests.test_projection_is_temporary_and_content_preserving) ... ok\ntest_source_repository_is_not_an_install_target (test_core.CoreTests.test_source_repository_is_not_an_install_target) ... ok\ntest_catalog_ci_fixture_statuses (test_development_checks.DevelopmentChecks.test_catalog_ci_fixture_statuses) ... ok\ntest_pattern_scan_does_not_verify_credentials_online (test_development_checks.DevelopmentChecks.test_pattern_scan_does_not_verify_credentials_online) ... ok\ntest_secret_check_pass_fail_and_redaction (test_development_checks.DevelopmentChecks.test_secret_check_pass_fail_and_redaction) ... ok\ntest_unscannable_input_is_failure (test_development_checks.DevelopmentChecks.test_unscannable_input_is_failure) ... ok\ntest_upstream_diagnostics_never_emit_values (test_development_checks.DevelopmentChecks.test_upstream_diagnostics_never_emit_values) ... ok\ntest_workflow_authority_boundaries (test_development_checks.DevelopmentChecks.test_workflow_authority_boundaries) ... ok\n\n----------------------------------------------------------------------\nRan 25 tests in 0.927s\n\nOK\n"
+    },
+    {
+      "command": ".venv/bin/python scripts/check_catalog_fixtures.py",
+      "status": "pass",
+      "exit_code": 0,
+      "output": "PASS: positive CLI status 0; all seven negative CLI statuses 1\n"
+    },
+    {
+      "command": ".venv/bin/python scripts/validate_catalog.py catalog/core.json --root .",
+      "status": "pass",
+      "exit_code": 0,
+      "output": "{\n  \"selected\": [\n    \"andes.contract@0.1.0\",\n    \"andes.handoff@0.1.0\",\n    \"andes.norms@0.1.0\",\n    \"andes.orient@0.1.0\",\n    \"andes.routing@0.1.0\",\n    \"andes.verify@0.1.0\"\n  ]\n}\n"
+    },
+    {
+      "command": ".venv/bin/python upstream/check_inventory.py",
+      "status": "pass",
+      "exit_code": 0,
+      "output": "PASS: six pinned sources, ten blocked-import candidate records; internal consistency only\n96b1034c84c81a63ed56c638fc32f58859ca0416dedcf36a741c1419f6092f3a README.md\n15a4771ad803347c6fcdd4180b3b7536b13dba5216bf6a9d620af3de4dbd0667 inventory.json\na65a884fbaefc5d1ca69f703c107ad250bf13c8ec60efba677632346d78a1db5 check_inventory.py\n"
+    },
+    {
+      "command": ".venv/bin/python scripts/check_secrets.py",
+      "status": "pass",
+      "exit_code": 0,
+      "output": "PASS: offline pattern secret scan\n"
+    },
+    {
+      "command": "git diff --check",
+      "status": "pass",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "method": "SHA-256 of all 16 paths in foundation-preserved.sha256 and byte comparison with git show <base>:<path>",
+      "status": "pass",
+      "result": "All 16 pre-existing evidence files and original manifests unchanged."
+    },
+    {
+      "method": "git diff --name-only <base> and local Markdown target existence",
+      "status": "pass",
+      "result": "All tracked changes are Markdown documentation. Local target existence checked; checks receipt target created after the first link check and rechecked at finalization. External links are acceptance references, not a claim every URL was freshly fetched."
+    }
+  ],
+  "independent_review": {
+    "status": "pass",
+    "reviewer": "Independent read-only L2 agent foundation_closeout_l2; not the producing agent or final human approver",
+    "observed_at_utc": "2026-11-28 00:58:13 UTC",
+    "manifest_sha256": "2a3a01783b6237ad43d9bf1fa5c19f0ed2918094e9acc62bc84b4bd4dd9c6706",
+    "findings": "No blocking or nonblocking defect found in the scoped documentation change.",
+    "reproduced": [
+      "25 unit tests",
+      "positive and seven invalid catalog fixtures",
+      "actual core catalog CLI validation",
+      "upstream inventory consistency",
+      "offline secret scan",
+      "git diff --check",
+      "all 16 historical evidence hashes and base byte comparisons",
+      "all 17 current manifest entries",
+      "current Markdown relative-link target existence"
+    ],
+    "limits": [
+      "Did not repeat uv sync; producer result reviewed.",
+      "No native probes, new hosted run, administrative-access verification or settings changes.",
+      "Check receipt final review bookkeeping is outside the manifest; substantive manifest was frozen."
+    ]
+  },
+  "quality": {
+    "functional_correctness": {
+      "status": "pass",
+      "rationale": "25 unit tests, seven invalid fixtures rejected, actual core catalog valid; completed implementation unchanged.",
+      "evidence": "checks"
+    },
+    "engineering_quality": {
+      "status": "pass",
+      "rationale": "Focused documentation-only change, required checks and independent L2 exact-manifest review pass; no defects reported.",
+      "evidence": "checks and independent_review"
+    },
+    "mathematical_correctness": {
+      "status": "not_applicable",
+      "rationale": "No mathematical algorithm or claim changed."
+    },
+    "scientific_validity": {
+      "status": "not_applicable",
+      "rationale": "No scientific result or domain-validity claim introduced."
+    },
+    "reproducibility": {
+      "status": "pass",
+      "rationale": "Locked setup, exact base/environment/commands and separate current fingerprints recorded; historical evidence preserved.",
+      "evidence": "foundation-closeout-manifest.sha256 and foundation-preserved.sha256"
+    },
+    "human_understanding": {
+      "status": "not_run",
+      "rationale": "No human-understanding assessment performed; scoped foundation acceptance is separate."
+    }
+  },
+  "omissions": [
+    "No native probes rerun: documentation-only scope preserves original dated observations.",
+    "No native implicit routing, successful model inference, relative-reference following, role execution, production plugin installation, cross-platform native compatibility or release installation/rollback verification.",
+    "No new hosted workflow run for this diff; reviewed-main hosted success is linked in foundation-closeout.md.",
+    "Detailed branch-protection endpoint returned 403; snapshot does not infer inaccessible administrative settings.",
+    "No GitHub settings changes, publication, merge or release. Human acceptance of this documentation diff remains separate."
+  ]
+}
