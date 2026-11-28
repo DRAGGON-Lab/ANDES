@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "release": {
+    "id": "andes",
+    "version": "0.0.0"
+  },
+  "source": {
+    "repository": "https://example.invalid/andes-fixture.git",
+    "commit": "0123456789abcdef0123456789abcdef01234567"
+  },
+  "catalog": {
+    "path": "catalog.json",
+    "sha256": "7f13f7ae928fcb15cd18f5b5dc4247430c17f01bd550c006b0b0ea5c507525ba",
+    "schema_version": "1.0.0"
+  },
+  "files": [
+    {
+      "path": "content/norms.md",
+      "sha256": "c829ac543726e1c1305bb112193027ec1bbd2d01e363bfc3604c00c6e2b97219"
+    },
+    {
+      "path": "content/verify.md",
+      "sha256": "4e9e9733bc54ef0cf66c4550c39e7392681284f77152e03f24d772b2b80f6897"
+    },
+    {
+      "path": "content/formal.md",
+      "sha256": "5b9e44709b26965eacadf326b07d6ca5c12f3cfc0bd12bc1f079ad6f2031303f"
+    },
+    {
+      "path": "content/fast.md",
+      "sha256": "fb6b5508b29de9a57db146cb8cf9a2262de9d0086684da8d8e966c165adf0db9"
+    },
+    {
+      "path": "content/references/checklist.md",
+      "sha256": "85cdbae881b6df1677dbab97c155de354a2731b62835554d3dd9690740074a19"
+    }
+  ],
+  "profiles": [
+    "andes.profile.verify@1.1.0",
+    "andes.profile.formal@1.0.0",
+    "andes.profile.fast@1.0.0"
+  ],
+  "adapter": {
+    "path": "metadata/adapter.json",
+    "sha256": "440b5741ffdd14a062b65100734aa34468632baf2194c3aad5be7f2eae9efe94"
+  },
+  "provenance": {
+    "path": "metadata/provenance.md",
+    "sha256": "f60303ba8a976b6bae532fea95fc901dd38532c9e440a23d824d2dc0c6d9b7db"
+  }
+}

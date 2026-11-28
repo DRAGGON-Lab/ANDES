@@ -1,0 +1,10 @@
+{
+  "id": "codex-project-local",
+  "version": "1.0.0",
+  "runtime": {
+    "id": "codex-cli",
+    "version": "0.172.0"
+  },
+  "platform": "darwin",
+  "architecture": "arm64"
+}

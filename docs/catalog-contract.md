@@ -40,4 +40,6 @@ CLI accepts a local catalog, optional `--root` content directory (defaults to th
 
 Python helpers are `validate(data, root) -> list[str]` and `compose(data, root, profiles=(), component=None) -> list[str]`; composition always validates and raises `ValueError` for rejected documents/selections.
 
+The [release resolver](release-contract.md) passes keyword-only `verified_paths` to these helpers in place of `root`. It supplies the exact set or mapping of canonical paths it has already verified. In this mode the catalog validator checks path membership without filesystem access to component content.
+
 The synthetic negative fixtures wrap a catalog and expected diagnostic; tests extract the catalog before validation. They are test cases, not valid catalog documents. Tests cover duplicate IDs, dependency failures/cycles, unresolved licenses, upstream clearance, lifecycle, incompatible selections, path boundaries, schema boundaries and direct selection. Native discovery/explicit loading, secret scans and hosted CI were delivered in separate accepted tasks; see [closeout](evidence/foundation-closeout.md). They do not expand this catalog API into installation or release management.

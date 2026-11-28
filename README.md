@@ -40,7 +40,7 @@ Native probes are separate manual macOS fixtures, not ordinary Linux CI or insta
 
 The bounded evidence establishes independent agent workflow selection/execution and actual explicit CLI skill-input assembly. It does **not** verify native implicit routing, successful native model inference, native relative-reference following, native role execution, production plugin installation, cross-platform native compatibility, or release installation/update/rollback. These are not supported foundation claims; this does not assert that Codex itself lacks those capabilities.
 
-Pinned distribution, domain/scientific and HPC profiles, Neruda integration, mission coordination, Arena and Dreaming remain planned capabilities under separate tasks and gates. No production installer, general runtime, release resolver or release is provided. ANDES remains independent of ECx, and [Neruda](https://github.com/DRAGGON-Lab/Neruda) remains separately versioned.
+Pinned distribution, domain/scientific and HPC profiles, Neruda integration, mission coordination, Arena and Dreaming remain planned capabilities under separate tasks and gates. The [A2.2 resolver candidate](docs/release-contract.md) verifies a pinned local snapshot. Production installation and release approval are separate gates. ANDES remains independent of ECx, and [Neruda](https://github.com/DRAGGON-Lab/Neruda) remains separately versioned.
 
 ## Start here
 
