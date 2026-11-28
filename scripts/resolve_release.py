@@ -169,7 +169,7 @@ def verify_inventory(directory, parent, children, files, records):
             check_digest(path, files[path], digest)
 
 
-def resolve(args):
+def resolve_with_catalog(args):
     if re.fullmatch(r"[0-9a-f]{64}", args.manifest_sha256) is None:
         raise ValueError("--manifest-sha256 requires 64 lowercase SHA-256 hex digits")
     profiles = sorted(set(args.profile))
@@ -232,7 +232,7 @@ def resolve(args):
             raise ValueError(f"{identity}: unsupported component kind {item['kind']} for {adapter_identity}")
         components.append({"identity": identity, "kind": item["kind"], **payload[item["path"]]})
 
-    return {
+    resolution = {
         "schema_version": "1.0.0",
         "release": release,
         "source": manifest["source"],
@@ -250,6 +250,13 @@ def resolve(args):
             "architecture": adapter["architecture"],
         },
     }
+
+    return resolution, catalog
+
+
+def resolve(args):
+    resolution, _ = resolve_with_catalog(args)
+    return resolution
 
 
 def main():
