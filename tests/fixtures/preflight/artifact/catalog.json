@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0.0",
+  "components": [
+    {
+      "id": "test.norms",
+      "version": "1.0.0",
+      "kind": "norm",
+      "path": "CONSTITUTION.md",
+      "description": "norms",
+      "requires": [],
+      "conflicts": [],
+      "lifecycle": "active",
+      "provenance": {
+        "kind": "original",
+        "license": "MIT",
+        "attribution": "Synthetic fixture"
+      }
+    },
+    {
+      "id": "test.routing",
+      "version": "1.0.0",
+      "kind": "playbook",
+      "path": "skills/ROUTING.md",
+      "description": "routing",
+      "requires": [],
+      "conflicts": [],
+      "lifecycle": "active",
+      "provenance": {
+        "kind": "original",
+        "license": "MIT",
+        "attribution": "Synthetic fixture"
+      }
+    },
+    {
+      "id": "test.verify",
+      "version": "1.0.0",
+      "kind": "skill",
+      "path": "skills/test-verify/SKILL.md",
+      "description": "verify",
+      "requires": [],
+      "conflicts": [],
+      "lifecycle": "active",
+      "provenance": {
+        "kind": "original",
+        "license": "MIT",
+        "attribution": "Synthetic fixture"
+      },
+      "invocation": "test-verify"
+    },
+    {
+      "id": "test.draft",
+      "version": "1.0.0",
+      "kind": "skill",
+      "path": "skills/test-draft/SKILL.md",
+      "description": "draft",
+      "requires": [],
+      "conflicts": [],
+      "lifecycle": "active",
+      "provenance": {
+        "kind": "original",
+        "license": "MIT",
+        "attribution": "Synthetic fixture"
+      },
+      "invocation": "test-draft"
+    }
+  ],
+  "profiles": [
+    {
+      "id": "test.optional",
+      "version": "1.0.0",
+      "description": "Synthetic profile",
+      "components": [
+        "test.draft@1.0.0"
+      ]
+    }
+  ],
+  "core": [
+    "test.norms@1.0.0",
+    "test.routing@1.0.0",
+    "test.verify@1.0.0"
+  ]
+}

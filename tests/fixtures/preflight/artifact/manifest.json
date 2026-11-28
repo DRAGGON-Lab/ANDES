@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "release": {
+    "id": "andes",
+    "version": "0.0.0"
+  },
+  "source": {
+    "repository": "https://example.invalid/preflight.git",
+    "commit": "0123456789abcdef0123456789abcdef01234567"
+  },
+  "catalog": {
+    "path": "catalog.json",
+    "sha256": "5ac89d00a0bb3f96c543884921b745d8db5d388d2e949c8a6302ff97903a70b5",
+    "schema_version": "1.0.0"
+  },
+  "adapter": {
+    "path": "adapter.json",
+    "sha256": "440b5741ffdd14a062b65100734aa34468632baf2194c3aad5be7f2eae9efe94"
+  },
+  "provenance": {
+    "path": "provenance.md",
+    "sha256": "93adcc23cbed4b29f4e8df355707dc4dd069de0f1190a21669e51d5477f27562"
+  },
+  "files": [
+    {
+      "path": "CONSTITUTION.md",
+      "sha256": "a974524c6cb0e505fe96da0959e8005a2e3e0af3695af0668050f6c0a7c403a2"
+    },
+    {
+      "path": "skills/ROUTING.md",
+      "sha256": "f61e9f0fe54daff42d2ff7146d9b3f3b530de4c023bc412894b8a650432fa19a"
+    },
+    {
+      "path": "skills/test-verify/SKILL.md",
+      "sha256": "81effb59450a4c00feb8db067414f38ca2b573b78ea9eef72a9c6aa4437b9edb"
+    },
+    {
+      "path": "skills/test-draft/SKILL.md",
+      "sha256": "2fea96354a75d1f3e9230fea02b033de93919696a6726e82a387ddce57840e6a"
+    },
+    {
+      "path": "skills/test-verify/references/example.md",
+      "sha256": "26aa96a911646887d17b1b3a933d292e80181971b83ede6802a1bc4ec0685b28"
+    },
+    {
+      "path": "skills/test-draft/references/example.md",
+      "sha256": "26aa96a911646887d17b1b3a933d292e80181971b83ede6802a1bc4ec0685b28"
+    },
+    {
+      "path": "shared/unmapped.md",
+      "sha256": "64f38acf0af4d96bf2aa2a104e53d5555369f35abdd3472c7e3efb68af5e9214"
+    }
+  ],
+  "profiles": [
+    "test.optional@1.0.0"
+  ]
+}
