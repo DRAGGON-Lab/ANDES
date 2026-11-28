@@ -1,0 +1,3 @@
+# Fast
+
+Synthetic release fixture.

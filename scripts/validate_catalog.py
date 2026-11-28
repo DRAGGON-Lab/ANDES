@@ -48,7 +48,7 @@ def _compose(data, profiles=(), component=None):
     return sorted(selected)
 
 
-def validate(data, root):
+def validate(data, root=None, *, verified_paths=None):
     schema = json.loads(SCHEMA.read_text())
     errors = [
         "schema: " + "/".join(map(str, error.absolute_path)) + ": " + error.message
@@ -63,14 +63,18 @@ def validate(data, root):
     invocations = [c["invocation"] for c in components.values() if c["kind"] == "skill"]
     if len(set(invocations)) != len(invocations):
         errors.append("duplicate invocation")
-    root = Path(root).resolve()
+    if verified_paths is None:
+        root = Path(root).resolve()
     for key, item in components.items():
-        path = Path(item["path"])
-        try:
-            resolved = (root / path).resolve()
-            valid_path = not path.is_absolute() and resolved.is_relative_to(root) and resolved.is_file()
-        except (OSError, RuntimeError, ValueError):
-            valid_path = False
+        if verified_paths is not None:
+            valid_path = item["path"] in verified_paths
+        else:
+            path = Path(item["path"])
+            try:
+                resolved = (root / path).resolve()
+                valid_path = not path.is_absolute() and resolved.is_relative_to(root) and resolved.is_file()
+            except (OSError, RuntimeError, ValueError):
+                valid_path = False
         if not valid_path:
             errors.append("invalid content path: " + key)
         provenance = item["provenance"]
@@ -104,8 +108,8 @@ def validate(data, root):
     return sorted(set(errors))
 
 
-def compose(data, root, profiles=(), component=None):
-    errors = validate(data, root)
+def compose(data, root=None, profiles=(), component=None, *, verified_paths=None):
+    errors = validate(data, root, verified_paths=verified_paths)
     if errors:
         raise ValueError("\n".join(errors))
     return _compose(data, profiles, component)

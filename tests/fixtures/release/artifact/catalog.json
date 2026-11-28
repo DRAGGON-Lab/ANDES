@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0.0",
+  "components": [
+    {
+      "id": "andes.fixture.norms",
+      "version": "1.0.0",
+      "description": "Synthetic norms",
+      "kind": "norm",
+      "path": "content/norms.md",
+      "lifecycle": "active",
+      "requires": [],
+      "conflicts": [],
+      "provenance": {
+        "kind": "original",
+        "license": "MIT",
+        "attribution": "ANDES synthetic fixture"
+      }
+    },
+    {
+      "id": "andes.fixture.verify",
+      "version": "2.0.0",
+      "description": "Synthetic verify",
+      "kind": "skill",
+      "path": "content/verify.md",
+      "lifecycle": "active",
+      "requires": [
+        "andes.fixture.norms@1.0.0"
+      ],
+      "conflicts": [],
+      "provenance": {
+        "kind": "original",
+        "license": "MIT",
+        "attribution": "ANDES synthetic fixture"
+      },
+      "invocation": "fixture-verify"
+    },
+    {
+      "id": "andes.fixture.formal",
+      "version": "1.0.0",
+      "description": "Synthetic formal",
+      "kind": "playbook",
+      "path": "content/formal.md",
+      "lifecycle": "active",
+      "requires": [
+        "andes.fixture.verify@2.0.0"
+      ],
+      "conflicts": [],
+      "provenance": {
+        "kind": "original",
+        "license": "MIT",
+        "attribution": "ANDES synthetic fixture"
+      }
+    },
+    {
+      "id": "andes.fixture.fast",
+      "version": "1.0.0",
+      "description": "Synthetic fast",
+      "kind": "playbook",
+      "path": "content/fast.md",
+      "lifecycle": "active",
+      "requires": [],
+      "conflicts": [
+        "andes.fixture.formal@1.0.0"
+      ],
+      "provenance": {
+        "kind": "original",
+        "license": "MIT",
+        "attribution": "ANDES synthetic fixture"
+      }
+    }
+  ],
+  "core": [
+    "andes.fixture.norms@1.0.0"
+  ],
+  "profiles": [
+    {
+      "id": "andes.profile.verify",
+      "version": "1.1.0",
+      "description": "Synthetic verify profile",
+      "components": [
+        "andes.fixture.verify@2.0.0"
+      ]
+    },
+    {
+      "id": "andes.profile.formal",
+      "version": "1.0.0",
+      "description": "Synthetic formal profile",
+      "components": [
+        "andes.fixture.formal@1.0.0"
+      ]
+    },
+    {
+      "id": "andes.profile.fast",
+      "version": "1.0.0",
+      "description": "Synthetic fast profile",
+      "components": [
+        "andes.fixture.fast@1.0.0"
+      ]
+    }
+  ]
+}
