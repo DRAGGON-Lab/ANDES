@@ -1,0 +1,30 @@
+[
+  {
+    "name": "outer ASCII whitespace",
+    "input": "\t Hi \n",
+    "expected": "hi",
+    "actual": "\thi\n",
+    "status": "fail"
+  },
+  {
+    "name": "preserve internal spacing",
+    "input": "A  B",
+    "expected": "a  b",
+    "actual": "ab",
+    "status": "fail"
+  },
+  {
+    "name": "ASCII lowercase",
+    "input": "ABC",
+    "expected": "abc",
+    "actual": "abc",
+    "status": "pass"
+  },
+  {
+    "name": "strip outer spaces",
+    "input": "  Hi  ",
+    "expected": "hi",
+    "actual": "hi",
+    "status": "pass"
+  }
+]

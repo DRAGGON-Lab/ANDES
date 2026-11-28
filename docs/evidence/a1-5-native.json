@@ -1,0 +1,34 @@
+{
+  "baseline": "1c77c37dd03dbdb24d17dee8ead1955573798e90",
+  "observed_at": "2026-11-28T00:18:05Z",
+  "method": ".venv/bin/python probes/core_loading.py --skill andes-verify; approved execution retaining probe OS sandbox",
+  "runtime": "Codex CLI 0.172.0 on macOS arm64",
+  "binary_sha256": "f30a99714dc984876864239ef60563949b1e21421a7c9180422f51fd39186bc6",
+  "result": {
+    "runtime_user_agent": "andes_core_capture/0.172.0 (Mac OS 27.2.1; arm64) unknown (andes_core_capture; 0.1.0)",
+    "controls": {
+      "real_home_read_denied": true,
+      "outside_write_denied": true,
+      "network_bind_denied": true,
+      "other_port_denied": true,
+      "capture_endpoint_reachable": true
+    },
+    "selected_skill": "andes-verify",
+    "native_body_presence": {
+      "andes-orient": false,
+      "andes-contract": false,
+      "andes-verify": true,
+      "andes-handoff": false
+    },
+    "unneeded_reference_absent": true,
+    "constitution_present": true,
+    "projection_file_count": 7,
+    "configured_provider_response": 400,
+    "model_completion_evaluated": false,
+    "external_model_calls": 0
+  },
+  "limits": [
+    "Actual native provider request assembly; capture is configured to respond 400 without inference, response receipt is not asserted",
+    "No CLI implicit-matching or model-completion claim"
+  ]
+}

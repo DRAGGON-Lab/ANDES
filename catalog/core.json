@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0.0",
+  "components": [
+    {
+      "id": "andes.norms",
+      "version": "0.1.0",
+      "kind": "norm",
+      "path": "CONSTITUTION.md",
+      "description": "Mandatory ANDES constitutional norms",
+      "lifecycle": "active",
+      "requires": [],
+      "conflicts": [],
+      "provenance": {
+        "kind": "original",
+        "license": "MIT",
+        "attribution": "DRAGGON Lab / ANDES contributors"
+      }
+    },
+    {
+      "id": "andes.routing",
+      "version": "0.1.0",
+      "kind": "playbook",
+      "path": "skills/ROUTING.md",
+      "description": "Progressive core workflow selection",
+      "lifecycle": "active",
+      "requires": [
+        "andes.norms@0.1.0"
+      ],
+      "conflicts": [],
+      "provenance": {
+        "kind": "original",
+        "license": "MIT",
+        "attribution": "DRAGGON Lab / ANDES contributors"
+      }
+    },
+    {
+      "id": "andes.orient",
+      "version": "0.1.0",
+      "kind": "skill",
+      "path": "skills/andes-orient/SKILL.md",
+      "description": "Establish repository identity, accepted task and evidence freshness when starting or resuming repository work with missing context.",
+      "lifecycle": "active",
+      "requires": [
+        "andes.norms@0.1.0"
+      ],
+      "conflicts": [],
+      "provenance": {
+        "kind": "original",
+        "license": "MIT",
+        "attribution": "DRAGGON Lab / ANDES contributors"
+      },
+      "invocation": "andes-orient"
+    },
+    {
+      "id": "andes.contract",
+      "version": "0.1.0",
+      "kind": "skill",
+      "path": "skills/andes-contract/SKILL.md",
+      "description": "Define observable acceptance and boundaries for a bounded engineering request before consequential implementation or an interface change.",
+      "lifecycle": "active",
+      "requires": [
+        "andes.norms@0.1.0"
+      ],
+      "conflicts": [],
+      "provenance": {
+        "kind": "original",
+        "license": "MIT",
+        "attribution": "DRAGGON Lab / ANDES contributors"
+      },
+      "invocation": "andes-contract"
+    },
+    {
+      "id": "andes.verify",
+      "version": "0.1.0",
+      "kind": "skill",
+      "path": "skills/andes-verify/SKILL.md",
+      "description": "Check a change or completion claim against acceptance criteria and observed evidence, including failed, stale and missing checks.",
+      "lifecycle": "active",
+      "requires": [
+        "andes.norms@0.1.0"
+      ],
+      "conflicts": [],
+      "provenance": {
+        "kind": "original",
+        "license": "MIT",
+        "attribution": "DRAGGON Lab / ANDES contributors"
+      },
+      "invocation": "andes-verify"
+    },
+    {
+      "id": "andes.handoff",
+      "version": "0.1.0",
+      "kind": "skill",
+      "path": "skills/andes-handoff/SKILL.md",
+      "description": "Prepare a resumable engineering handoff with artifact identity, actual evidence, remaining blockers and the next authorized action.",
+      "lifecycle": "active",
+      "requires": [
+        "andes.norms@0.1.0"
+      ],
+      "conflicts": [],
+      "provenance": {
+        "kind": "original",
+        "license": "MIT",
+        "attribution": "DRAGGON Lab / ANDES contributors"
+      },
+      "invocation": "andes-handoff"
+    }
+  ],
+  "core": [
+    "andes.norms@0.1.0",
+    "andes.routing@0.1.0",
+    "andes.orient@0.1.0",
+    "andes.contract@0.1.0",
+    "andes.verify@0.1.0",
+    "andes.handoff@0.1.0"
+  ],
+  "profiles": []
+}
