@@ -83,13 +83,17 @@ def root_directory(path, scope):
                 {os.open, os.stat} <= os.supports_dir_fd, os.listdir in os.supports_fd,
                 os.stat in os.supports_follow_symlinks)):
         raise Blocked("host_unsupported", "host", ".", "Descriptor-relative no-follow reads are unavailable.")
-    with releases.open_directory("/", scope) as filesystem:
-        with at_path(filesystem, path.relative_to("/").as_posix(), scope) as (parent, name):
+    with ExitStack() as stack:
+        filesystem = stack.enter_context(releases.open_directory("/", scope))
+        try:
+            parent, name = stack.enter_context(at_path(filesystem, path.relative_to("/").as_posix(), scope))
             info = lookup(parent, name, scope, ".") if parent is not None else None
             if info is None or not stat.S_ISDIR(info.st_mode):
-                raise Blocked("unsafe_path", scope, ".", "Supply an existing real directory without links.")
-            with releases.open_directory(name, scope, parent) as root:
-                yield root
+                raise ValueError
+            root = stack.enter_context(releases.open_directory(name, scope, parent))
+        except (OSError, ValueError):
+            raise Blocked("unsafe_path", scope, ".", "Supply an existing physical directory without links or spelling aliases.") from None
+        yield root
 
 
 def entry(root, path, scope):
@@ -191,23 +195,38 @@ def existing_skill_names(root, path, scope):
     if not stat.S_ISDIR(info.st_mode):
         raise Blocked("unsafe_path", scope, path, "Use a real skill directory without links.")
     names = []
+    remaining = 10_000
+
+    def scan(directory, depth):
+        nonlocal remaining
+        entries = sorted(os.listdir(directory))
+        remaining -= len(entries)
+        if depth > 32 or remaining < 0:
+            raise Blocked("unknown_skill_metadata", scope, path, "Inspect the skill root after reaching the scan limit.")
+        if len({fold(name) for name in entries}) != len(entries):
+            raise Blocked("unsafe_path", scope, path, "Resolve ambiguous names in the skill root.")
+        for name in entries:
+            info = os.stat(name, dir_fd=directory, follow_symlinks=False)
+            if fold(name) == "skill.md":
+                if name != "SKILL.md":
+                    raise Blocked("unknown_skill_metadata", scope, path, "Use the exact SKILL.md spelling.")
+                try:
+                    raw = read_at(directory, name, scope, SKILL_HEADER_BUDGET)
+                except Blocked:
+                    raise Blocked("unknown_skill_metadata", scope, path, "Use a regular SKILL.md without links.") from None
+                skill = skill_name(raw)
+                if skill is None:
+                    raise Blocked("unknown_skill_metadata", scope, path, "Review unsupported skill front matter.")
+                names.append(skill)
+            elif stat.S_ISDIR(info.st_mode):
+                with releases.open_directory(name, path, directory) as child:
+                    scan(child, depth + 1)
+            elif not stat.S_ISREG(info.st_mode):
+                raise Blocked("unsafe_path", scope, path, "Review links or nonregular entries in the skill root.")
+
     with at_path(root, path, scope) as (parent, name):
         with releases.open_directory(name, path, parent) as skills:
-            for folder in sorted(os.listdir(skills)):
-                if folder.startswith("."):
-                    raise Blocked("unknown_skill_metadata", scope, path, "Inspect hidden entries in the skill directory.")
-                info = lookup(skills, folder, scope, path)
-                if not stat.S_ISDIR(info.st_mode):
-                    raise Blocked("unsafe_path", scope, path, "Inspect unexpected entries in the skill directory.")
-                with releases.open_directory(folder, path, skills) as skill:
-                    try:
-                        raw = read_at(skill, "SKILL.md", scope, SKILL_HEADER_BUDGET)
-                    except Blocked:
-                        raise Blocked("unknown_skill_metadata", scope, path, "Use a regular SKILL.md in each skill folder.") from None
-                    name = skill_name(raw)
-                    if name is None:
-                        raise Blocked("unknown_skill_metadata", scope, path, "Review unsupported skill front matter.")
-                    names.append(name)
+            scan(skills, 0)
     return names
 
 
@@ -255,8 +274,11 @@ def instructions_review(path, manifest, original, policy, result):
                       "Review the project instructions against the pinned ANDES policy and supply the confirmed record.")
     keys = {"schema_version", "manifest_sha256", "confirmed", "decision", "findings", *state}
     try:
-        with root_directory(path.absolute().parent, "review") as root:
-            raw = read_at(root, path.name, "review", 64 * 1024 + 1)
+        if path.name in ("", ".", ".."):
+            raise ValueError
+        absolute = path.absolute()
+        with root_directory(absolute.parent, "review") as root:
+            raw = read_at(root, absolute.name, "review", 64 * 1024 + 1)
         if len(raw) > 64 * 1024:
             raise ValueError
         value = releases.parse_json(raw, "review")
@@ -369,12 +391,13 @@ def preflight(args, result):
     with ExitStack() as stack:
         roots = [stack.enter_context(root_directory(path, scope)) for path, scope in scopes]
         project, home, codex_home = roots[:3]
-        if (args.project == args.home or args.project.is_relative_to(args.codex_home)
+        if (args.home.is_relative_to(args.project) or args.project.is_relative_to(args.codex_home)
                 or args.codex_home.is_relative_to(args.project)
-                or args.command == "install" and any(
-                    args.artifact.is_relative_to(path) or path.is_relative_to(args.artifact)
-                    for path in (args.project, args.codex_home))):
-            raise Blocked("unsafe_path", "project", ".", "Use distinct project, Codex home and artifact roots.")
+                or args.command == "install" and (
+                    args.home.is_relative_to(args.artifact) or any(
+                        args.artifact.is_relative_to(path) or path.is_relative_to(args.artifact)
+                        for path in (args.project, args.codex_home)))):
+            raise Blocked("unsafe_path", "project", ".", "Keep the home outside the project and artifact and keep managed roots separate.")
         result["host"] = host = detect_host(args.codex_bin, [path for path, _ in scopes])
         adapter = releases.SUPPORTED_ADAPTER
         if (host["platform"], host["architecture"], host["codex_version"]) != (

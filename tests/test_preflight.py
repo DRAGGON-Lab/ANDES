@@ -158,6 +158,15 @@ class PreflightTests(unittest.TestCase):
                 self.review.write_text(json.dumps({**record, field: value}))
                 self.run_cli("--instructions-review", str(self.review), status=1, code=code)
 
+    def test_invalid_review_paths_return_a_redacted_report(self):
+        self.agents.write_text("Use make check.\n")
+        self.review_record()
+        for path in ("", ".", "..", "/", self.home, "missing.json"):
+            with self.subTest(path=path):
+                self.run_cli("--instructions-review", str(path), status=1,
+                             code="instruction_review_invalid")
+        self.run_cli("--instructions-review", self.review.name)
+
     def test_hidden_configuration_and_override_block(self):
         config = self.codex_home / "config.toml"
         config.write_text("unread synthetic settings\n")
@@ -189,6 +198,30 @@ class PreflightTests(unittest.TestCase):
         directory.rename(directory.with_name("spelling-change"))
         directory.with_name("spelling-change").rename(directory.with_name("test-verify"))
         self.run_cli(status=1, code="destination_conflict")
+
+    def test_skill_conflicts_below_the_first_directory_level(self):
+        self.put_skill(self.home, "group", "personal-other")
+        self.put_skill(self.home, "group/subgroup", "test-verify")
+        self.run_cli(status=1, code="skill_name_conflict")
+
+    def test_absolute_ancestor_errors_hide_private_path_components(self):
+        private = self.root / "private-marker"
+        private.mkdir()
+        (private / "alias").symlink_to(self.root, target_is_directory=True)
+        for ancestor in (private, private.with_name("PRIVATE-MARKER")):
+            with self.subTest(ancestor=ancestor):
+                self.project = ancestor / "alias" / "project"
+                report = self.run_cli(command="doctor", status=1, code="unsafe_path")
+                self.assertNotIn("private-marker", json.dumps(report).lower())
+                self.assertEqual(report["findings"][0]["path"], ".")
+
+    def test_project_or_artifact_cannot_contain_home(self):
+        self.home = self.project / ".agents"
+        self.home.mkdir()
+        self.run_cli(status=1, code="unsafe_path")
+        self.home = self.artifact / "contained-home"
+        self.home.mkdir()
+        self.run_cli(status=1, code="unsafe_path")
 
     def test_unsafe_and_tampered_inputs_block(self):
         self.agents.symlink_to(self.artifact / "CONSTITUTION.md")
