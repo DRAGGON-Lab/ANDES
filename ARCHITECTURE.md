@@ -36,7 +36,7 @@ ANDES owns workflow definitions and explicit contracts, not the user's research 
 | Playbooks and roles | Compose skills and bounded responsibilities | Routing pointers implemented. General role execution/topologies remain unverified/planned. |
 | Profiles/catalog | Canonical IDs, local dependency/composition and provenance eligibility | Accepted [v1 contract](docs/catalog-contract.md), semantic validator, core catalog and fixtures; production domain profiles remain planned. |
 | Task router | Progressive selection and explicit invocation | One independent agent selection/task fixture plus native explicit input assembly; [bounded evidence](docs/core-fixture.md), not native implicit-routing verification. |
-| Distribution and adapter | Native projection and eventual pinned distribution | Temporary project-local projection under ADR-004 and a [pinned resolver candidate](docs/release-contract.md) under proposed ADR-005. Installation and ownership-aware update/rollback remain planned. |
+| Distribution and adapter | Native projection and eventual pinned distribution | Temporary project-local projection under ADR-004 and a [pinned resolver candidate](docs/release-contract.md) under accepted [ADR-005](docs/decisions/ADR-005.md). Installation and ownership-aware update/rollback remain planned. |
 | Context and evidence | Orientation, verification and resumable handoff | Skills and dated receipts implemented; A3.1 durable task/evidence wire schemas remain planned. |
 | Scientific profiles | Numerical, ML, biological and HPC methods | Planned; domain tests, source permissions and approval still required. |
 | Mission runtime | Enforced scope, budgets, recovery and cancellation | Planned/disabled pending G5 evidence; no autonomy runtime implemented. |
@@ -47,7 +47,7 @@ There is no production frontend/back-end service split. The user interface is th
 
 ## Data and authority model
 
-`Component` and `Profile` have the accepted local catalog contract. A2.2 proposes the pinned local `Release` contract. Other logical entities—`ProjectContext`, `TaskContract`, `EvidenceReceipt`, `Handoff`, `DecisionRecord`, `Mission`, `Attempt`, `EvaluationProtocol`, `Candidate`, `ExperienceNode` and `ObservedTransition`—remain design concepts rather than finalized wire schemas. Each durable identity must link to immutable source/revision and ownership. A3.1 and later tasks establish their fields, migrations, persistence and validation. An ANDES release lockfile, `andes.yaml` and `.andes/` remain proposals; the existing `uv.lock` pins Python verification dependencies, not an ANDES release.
+`Component` and `Profile` have the accepted local catalog contract. ADR-005 defines the pinned local `Release` contract. Other logical entities—`ProjectContext`, `TaskContract`, `EvidenceReceipt`, `Handoff`, `DecisionRecord`, `Mission`, `Attempt`, `EvaluationProtocol`, `Candidate`, `ExperienceNode` and `ObservedTransition`—remain design concepts rather than finalized wire schemas. Each durable identity must link to immutable source/revision and ownership. A3.1 and later tasks establish their fields, migrations, persistence and validation. An ANDES release lockfile, `andes.yaml` and `.andes/` remain proposals; the existing `uv.lock` pins Python verification dependencies, not an ANDES release.
 
 | Record | Authoritative owner |
 |---|---|

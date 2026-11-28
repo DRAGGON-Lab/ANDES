@@ -1,6 +1,6 @@
 # Local release resolution v1
 
-[A2.2 / #19](https://github.com/DRAGGON-Lab/ANDES/issues/19) resolves an unpacked local snapshot to a deterministic JSON record. [ADR-005](decisions/ADR-005.md) describes the proposed trust and composition boundary.
+[A2.2 / #19](https://github.com/DRAGGON-Lab/ANDES/issues/19) resolves an unpacked local snapshot to a deterministic JSON record. [ADR-005](decisions/ADR-005.md) records the accepted trust and composition boundary.
 
 ## Manifest and inventory
 
