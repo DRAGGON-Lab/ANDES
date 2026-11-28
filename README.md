@@ -1,6 +1,6 @@
 # ANDES
 
-**Agentic Network for Disciplined Engineering and Science**
+**Agentic Norms for Disciplined Engineering and Science**
 
 ANDES is DRAGGON Lab's framework for rigorous AI-assisted software engineering, scientific research and researcher development. It connects researchers, reusable engineering methods, bounded agent teams, deterministic tools and auditable evidence. The aim is reliable knowledge and independent human competence, not simply more AI-generated output.
 
