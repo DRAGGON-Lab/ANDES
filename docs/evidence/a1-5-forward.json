@@ -1,0 +1,200 @@
+{
+  "task": "Assess bounded label normalization completion; no source or acceptance edits",
+  "workflow": [
+    "andes-verify"
+  ],
+  "rigour": "L1",
+  "timestamp_utc": "2026-11-28T00:12:52.951024+00:00",
+  "project_identity": "<fixture>",
+  "revision": null,
+  "dirty_state": "No .git repository; git rev-parse exited 128. Candidate identified by SHA-256 fingerprints.",
+  "parent_repository": {
+    "revision": "1c77c37dd03dbdb24d17dee8ead1955573798e90",
+    "dirty_state": "Pre-existing untracked adapters/, catalog/, probes/, skills/, tests/test_core.py and compatibility/ADR/evidence docs observed and preserved."
+  },
+  "acceptance": [
+    "strip outer whitespace",
+    "lowercase ASCII labels",
+    "preserve internal spacing"
+  ],
+  "conclusion": {
+    "ready_to_mark_complete": false,
+    "status": "fail",
+    "blocking_findings": [
+      "Supplied internal-spacing test fails: A  B produces ab, expected a  b.",
+      "Outer tab/newline whitespace is retained: tab + Hi + newline produces tab + hi + newline, expected hi."
+    ],
+    "completion_note": "The claim that all three tests pass is contradicted by the executed supplied suite."
+  },
+  "environment": {
+    "python": "3.9.6 (default, Oct 19 2026, 19:18:13) \n[Clang 21.0.0 (clang-2100.4.1.1)]",
+    "executable": "/Library/Developer/CommandLineTools/usr/bin/python3",
+    "platform": "macOS-27.2.1-arm64-arm-64bit"
+  },
+  "commands": [
+    {
+      "command": "git rev-parse --show-toplevel && git rev-parse HEAD && git status --short",
+      "cwd": "<fixture>",
+      "exit_status": 128,
+      "result": "Not a Git repository; revision and Git dirty state unavailable."
+    },
+    {
+      "command": "<ANDES>/.venv/bin/python <ANDES>/probes/core_loading.py --skill andes-verify (initial unquoted attempt)",
+      "exit_status": 127,
+      "result": "Shell split path at space; no probe execution."
+    },
+    {
+      "command": "'<ANDES>/.venv/bin/python' '<ANDES>/probes/core_loading.py' --skill andes-verify",
+      "sandbox": "default",
+      "exit_status": 1,
+      "result": "Loopback server bind PermissionError: Operation not permitted."
+    },
+    {
+      "command": "'<ANDES>/.venv/bin/python' '<ANDES>/probes/core_loading.py' --skill andes-verify",
+      "sandbox": "authorized require_escalated",
+      "exit_status": 0,
+      "result": {
+        "selected_skill": "andes-verify",
+        "native_body_presence": {
+          "andes-orient": false,
+          "andes-contract": false,
+          "andes-verify": true,
+          "andes-handoff": false
+        },
+        "unneeded_reference_absent": true,
+        "constitution_present": true,
+        "projection_file_count": 7,
+        "provider_response": 400,
+        "model_completion_evaluated": false,
+        "external_model_calls": 0,
+        "controls": {
+          "real_home_read_denied": true,
+          "outside_write_denied": true,
+          "network_bind_denied": true,
+          "other_port_denied": true,
+          "capture_endpoint_reachable": true
+        }
+      }
+    },
+    {
+      "command": "python3 -B -m unittest -v test_labels",
+      "exit_status": 1,
+      "result": "3 tests run; 2 pass and internal-spacing test fails. Repeated once to preserve output artifact.",
+      "artifact": "supplied-tests.txt"
+    },
+    {
+      "command": "python3 -B - (standard-library boundary-case harness recorded in this report)",
+      "exit_status": 0,
+      "result": [
+        {
+          "name": "outer ASCII whitespace",
+          "input": "\t Hi \n",
+          "expected": "hi",
+          "actual": "\thi\n",
+          "status": "fail"
+        },
+        {
+          "name": "preserve internal spacing",
+          "input": "A  B",
+          "expected": "a  b",
+          "actual": "ab",
+          "status": "fail"
+        },
+        {
+          "name": "ASCII lowercase",
+          "input": "ABC",
+          "expected": "abc",
+          "actual": "abc",
+          "status": "pass"
+        },
+        {
+          "name": "strip outer spaces",
+          "input": "  Hi  ",
+          "expected": "hi",
+          "actual": "hi",
+          "status": "pass"
+        }
+      ],
+      "artifact": "boundary-tests.json"
+    }
+  ],
+  "quality": {
+    "functional_correctness": {
+      "status": "fail",
+      "evidence": [
+        "supplied-tests.txt",
+        "boundary-tests.json"
+      ],
+      "rationale": "Two acceptance behaviors fail."
+    },
+    "engineering_quality": {
+      "status": "fail",
+      "evidence": [
+        "labels.py",
+        "test_labels.py",
+        "supplied-tests.txt",
+        "completion-note.txt"
+      ],
+      "rationale": "Implementation violates its own regression test; completion summary is inaccurate."
+    },
+    "mathematical_correctness": {
+      "status": "not_applicable",
+      "rationale": "No mathematical algorithm claim."
+    },
+    "scientific_validity": {
+      "status": "not_applicable",
+      "rationale": "No empirical scientific claim."
+    },
+    "reproducibility": {
+      "status": "pass",
+      "evidence": [
+        "supplied-tests.txt",
+        "boundary-tests.json"
+      ],
+      "rationale": "Local standard-library checks reproduced, environment and input hashes recorded; Git revision unavailable."
+    },
+    "human_understanding": {
+      "status": "not_run",
+      "rationale": "No human understanding check was requested or performed."
+    }
+  },
+  "files_read": [
+    "AGENTS.md",
+    "brief.txt",
+    "candidate-skills.json",
+    "candidate-manifest.json",
+    "completion-note.txt",
+    "labels.py",
+    "test_labels.py",
+    ".agents/skills/andes-verify/SKILL.md",
+    "<ANDES>/CONSTITUTION.md",
+    "<ANDES>/AGENT.md",
+    "<ANDES>/PRODUCT.md",
+    "<ANDES>/ARCHITECTURE.md"
+  ],
+  "input_sha256": {
+    "AGENTS.md": "40633287f1ec830a0dc030ddbdbc3bd136cd3b240fb3cbcf2d212290b410346f",
+    "brief.txt": "0b3e9db1fc5bbadf087d0022c4c71e3003a667850858b509e547d6b4b519edb3",
+    "candidate-skills.json": "cc19eff4ea93dcf5462bf1cfed7fca0df41e683177409b503acaeabca96555cc",
+    "candidate-manifest.json": "021ff63df2c64d884f3803698b9cc681e0d7bfff7c28d9929265f536b29ef468",
+    "completion-note.txt": "c416562328addcd9264824c12879b35f70b5a2aaa6c5316cbbda1604e821bc59",
+    "labels.py": "29c9c444ffa5e14c8760f6020c3b9a7178f727dfdd5130a138d29a0da6e64422",
+    "test_labels.py": "c2e007701c1a371beaa9a160530cc559ce6cfd3d8ec324bc4fa59bacf620d761",
+    ".agents/skills/andes-verify/SKILL.md": "f4ba28cbcc742cc0ef956ada1c056a650fca5e14dd16f0b756dbc98e6ccf37be"
+  },
+  "inputs_unchanged": true,
+  "limitations": [
+    "Fixture is not a Git repository; exact commit identity is unavailable.",
+    "Only supplied and focused boundary tests were run; no exhaustive string-domain verification.",
+    "Probe verifies loading and isolation only; synthetic provider HTTP 400 is not a model completion.",
+    "No source fixes, publication, external service calls or private data inspection performed."
+  ],
+  "next_permitted_action": "Return this failed readiness assessment to the owner. Owner may authorize a bounded correction preserving internal spacing and stripping outer whitespace, then rerun the supplied and boundary checks before claiming completion. Source modification is outside this task authorization.",
+  "written_artifacts": [
+    "report.json",
+    "supplied-tests.txt",
+    "boundary-tests.json"
+  ],
+  "evidence_kind": "Independent agent forward test; filesystem paths normalized, not a native CLI semantic-routing evaluation",
+  "original_report_sha256": "d02ebc42d22f5a374491591939e82593ec54bf352b778f085c8a6855029002ee"
+}

@@ -1,0 +1,20 @@
+test_internal_spacing (test_labels.Labels) ... FAIL
+test_lowercase (test_labels.Labels) ... ok
+test_outer_space (test_labels.Labels) ... ok
+
+======================================================================
+FAIL: test_internal_spacing (test_labels.Labels)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<fixture>/test_labels.py", line 10, in test_internal_spacing
+    self.assertEqual(normalize_label("A  B"), "a  b")
+AssertionError: 'ab' != 'a  b'
+- ab
++ a  b
+?  ++
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+FAILED (failures=1)
